@@ -9,22 +9,16 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var rankingBarCollectionView: UICollectionView!
+    var housingCollectionView: UICollectionView!
+//    var filterArray: [Filters]!
+//    var housingArray: [Housing]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
     
-//    helloosdiajdkahclkajssjhda
-//    s
-//    bad
-    func bad(){
-        print("v bad")
-        
-    }
-    func test(){
-        
-    }
-//    hellp
 }
 
