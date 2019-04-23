@@ -26,6 +26,7 @@ class ViewController: UIViewController {
             print("hello")
             print("testssss")
             print("hope this one works now")
+            print("another test 1:47pm")
         }
     }
     
