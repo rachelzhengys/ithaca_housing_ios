@@ -12,8 +12,12 @@ class ViewController: UIViewController {
     
     var rankingBarCollectionView: UICollectionView!
     var housingCollectionView: UICollectionView!
-//    var filterArray: [Filters]!
-//    var housingArray: [Housing]!
+    var rankArray: [Ranks]!
+    var housingArray: [Houses]!
+    
+    let restCellReuseIdentifier = "restCellReuseIdentifier"
+    let filterCellReuseIdentifier = "filterCellReuseIdentifier"
+    let padding: CGFloat = 8
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A6BD9E7226F57A400F188F4 /* Houses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6BD9E6226F57A400F188F4 /* Houses.swift */; };
+		8A6BD9E9226F591B00F188F4 /* Ranks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6BD9E8226F591B00F188F4 /* Ranks.swift */; };
 		8AFAB090226EBADA0036FC6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAB08F226EBADA0036FC6C /* AppDelegate.swift */; };
 		8AFAB092226EBADA0036FC6C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAB091226EBADA0036FC6C /* ViewController.swift */; };
 		8AFAB097226EBAE10036FC6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AFAB096226EBAE10036FC6C /* Assets.xcassets */; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8A6BD9E6226F57A400F188F4 /* Houses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Houses.swift; sourceTree = "<group>"; };
+		8A6BD9E8226F591B00F188F4 /* Ranks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ranks.swift; sourceTree = "<group>"; };
 		8AFAB08C226EBADA0036FC6C /* Ithaca Housing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ithaca Housing.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AFAB08F226EBADA0036FC6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8AFAB091226EBADA0036FC6C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,8 +58,10 @@
 			children = (
 				8AFAB08F226EBADA0036FC6C /* AppDelegate.swift */,
 				8AFAB091226EBADA0036FC6C /* ViewController.swift */,
+				8A6BD9E8226F591B00F188F4 /* Ranks.swift */,
 				8AFAB096226EBAE10036FC6C /* Assets.xcassets */,
 				8AFAB098226EBAE10036FC6C /* LaunchScreen.storyboard */,
+				8A6BD9E6226F57A400F188F4 /* Houses.swift */,
 				8AFAB09B226EBAE10036FC6C /* Info.plist */,
 			);
 			path = "Ithaca Housing";
@@ -132,6 +138,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AFAB092226EBADA0036FC6C /* ViewController.swift in Sources */,
+				8A6BD9E9226F591B00F188F4 /* Ranks.swift in Sources */,
+				8A6BD9E7226F57A400F188F4 /* Houses.swift in Sources */,
 				8AFAB090226EBADA0036FC6C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
