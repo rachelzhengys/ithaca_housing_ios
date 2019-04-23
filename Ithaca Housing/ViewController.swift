@@ -18,6 +18,9 @@ class ViewController: UIViewController {
 //    helloosdiajdkahclkajssjhda
 //    s
 //    bad
+    func bad(){
+        
+    }
 
 }
 
