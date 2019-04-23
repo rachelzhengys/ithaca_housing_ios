@@ -22,6 +22,9 @@ class ViewController: UIViewController {
         print("v bad")
         
     }
-
+    func test(){
+        
+    }
+//    hellp
 }
 
