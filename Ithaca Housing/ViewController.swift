@@ -19,6 +19,7 @@ class ViewController: UIViewController {
 //    s
 //    bad
     func bad(){
+        print("v bad")
         
     }
 
