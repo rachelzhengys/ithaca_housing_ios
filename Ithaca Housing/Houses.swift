@@ -17,10 +17,10 @@ class Houses {
     var contact: String
     var description: String
     var type: String
-    var leaseDate: String
+    var postDate: String
     
     
-    init(houseName: String, houseLocation: String, housePrice: Int, houseImage: String, houseContact: String, houseDescription: String, houseType: String, houseLeaseDate: String) {
+    init(houseName: String, houseLocation: String, housePrice: Int, houseImage: String, houseContact: String, houseDescription: String, houseType: String, postDate: String) {
         self.name = houseName
         self.location = houseLocation
         self.image = houseImage
@@ -28,6 +28,6 @@ class Houses {
         self.contact = houseContact
         self.description = houseDescription
         self.type = houseType
-        self.leaseDate = houseLeaseDate
+        self.postDate = postDate
 }
 }
