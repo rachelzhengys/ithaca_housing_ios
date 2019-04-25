@@ -47,5 +47,17 @@ def post_house():
     return json.dumps({"success": True, "data": house.serialize()}), 201
 
 
+@app.route("/api/house/<int:house_id>/", methods=["DELETE"])
+def delete_house_by_id(house_id):
+    house = House.query.filter_by(id=house_id).first()
+
+    if house is not None:
+        db.session.delete(house)
+        db.session.commit()
+        return json.dumps({'success': True, 'data': house.serialize()}), 200
+
+    return json.dumps({'success': False, 'error': 'House not found!'}), 404
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
