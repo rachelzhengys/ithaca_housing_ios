@@ -79,11 +79,18 @@ class ViewController: UIViewController {
             ])
     }
     
-    func presentDetailView(selectedHouse:Houses) {
-        let modalViewController = ModalViewController(houseHolder: selectedHouse)
-//        modalViewController.delegate = self
-        present(modalViewController, animated: true, completion: nil)
+    @objc func pushCrossingController(){
+        let crossing = ModalViewController(houseHolder: house1)
+        crossing.delegate = self
+         navigationController?.pushViewController(crossing, animated: true)
+        
     }
+    
+//    func presentDetailView(selectedHouse:Houses) {
+//        let modalViewController = ModalViewController(houseHolder: selectedHouse)
+////        modalViewController.delegate = self
+//        present(modalViewController, animated: true, completion: nil)
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -119,6 +126,8 @@ extension ViewController: UICollectionViewDataSource{
         cell.layer.borderWidth = 1
         return cell
     }
+    
+
 }
 
 extension ViewController: UICollectionViewDelegate{
@@ -156,20 +165,5 @@ extension ViewController: UICollectionViewDelegateFlowLayout{
     }
 }
 
-//extension ViewController: ChangeViewControllerLabels {
-//
-//    func nameChange(new_name: String) {
-//        songs[chosenIndex].name = new_name
-//        tableView.reloadData()
-//    }
-//    func albumChange(new_album: String) {
-//        songs[chosenIndex].album = new_album
-//        tableView.reloadData()
-//    }
-//    func artistChange(new_artist: String) {
-//        songs[chosenIndex].artist = new_artist
-//        tableView.reloadData()
-//    }
-//}
 
 
