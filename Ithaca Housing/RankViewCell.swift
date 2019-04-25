@@ -38,7 +38,7 @@ class RankViewCell: UICollectionViewCell {
             rankName.topAnchor.constraint(equalTo: contentView.topAnchor),
             rankName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             rankName.heightAnchor.constraint(equalToConstant: 20),
-            rankName.widthAnchor.constraint(equalToConstant: 80)
+            rankName.widthAnchor.constraint(equalToConstant: 150)
             //            filterName.bottomAnchor.constraint(equalTo: contentView.topAnchor),
             //            filterName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             ])

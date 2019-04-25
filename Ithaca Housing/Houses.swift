@@ -12,7 +12,7 @@ class Houses {
     
     var name: String
     var location: String
-    var price: Int
+    var price: String
     var image: String
     var contact: String
     var description: String
@@ -20,7 +20,7 @@ class Houses {
     var postDate: String
     
     
-    init(houseName: String, houseLocation: String, housePrice: Int, houseImage: String, houseContact: String, houseDescription: String, houseType: String, postDate: String) {
+    init(houseName: String, houseLocation: String, housePrice: String, houseImage: String, houseContact: String, houseDescription: String, houseType: String, postDate: String) {
         self.name = houseName
         self.location = houseLocation
         self.image = houseImage

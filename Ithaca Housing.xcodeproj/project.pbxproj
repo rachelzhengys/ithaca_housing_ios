@@ -11,6 +11,7 @@
 		8A6BD9E9226F591B00F188F4 /* Ranks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6BD9E8226F591B00F188F4 /* Ranks.swift */; };
 		8A6BD9EB22700C2F00F188F4 /* RankViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6BD9EA22700C2F00F188F4 /* RankViewCell.swift */; };
 		8A6BD9ED2270173700F188F4 /* HousingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6BD9EC2270173700F188F4 /* HousingViewCell.swift */; };
+		8A765F2A22714523006AB9CE /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A765F2922714523006AB9CE /* ModalViewController.swift */; };
 		8AFAB090226EBADA0036FC6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAB08F226EBADA0036FC6C /* AppDelegate.swift */; };
 		8AFAB092226EBADA0036FC6C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAB091226EBADA0036FC6C /* ViewController.swift */; };
 		8AFAB097226EBAE10036FC6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AFAB096226EBAE10036FC6C /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 		8A6BD9E8226F591B00F188F4 /* Ranks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ranks.swift; sourceTree = "<group>"; };
 		8A6BD9EA22700C2F00F188F4 /* RankViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankViewCell.swift; sourceTree = "<group>"; };
 		8A6BD9EC2270173700F188F4 /* HousingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousingViewCell.swift; sourceTree = "<group>"; };
+		8A765F2922714523006AB9CE /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
 		8AFAB08C226EBADA0036FC6C /* Ithaca Housing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ithaca Housing.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AFAB08F226EBADA0036FC6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8AFAB091226EBADA0036FC6C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 			children = (
 				8AFAB08F226EBADA0036FC6C /* AppDelegate.swift */,
 				8AFAB091226EBADA0036FC6C /* ViewController.swift */,
+				8A765F2922714523006AB9CE /* ModalViewController.swift */,
 				8A6BD9EA22700C2F00F188F4 /* RankViewCell.swift */,
 				8A6BD9EC2270173700F188F4 /* HousingViewCell.swift */,
 				8A6BD9E8226F591B00F188F4 /* Ranks.swift */,
@@ -149,6 +152,7 @@
 				8A6BD9E9226F591B00F188F4 /* Ranks.swift in Sources */,
 				8A6BD9E7226F57A400F188F4 /* Houses.swift in Sources */,
 				8AFAB090226EBADA0036FC6C /* AppDelegate.swift in Sources */,
+				8A765F2A22714523006AB9CE /* ModalViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
