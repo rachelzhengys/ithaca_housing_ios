@@ -80,9 +80,9 @@ class ViewController: UIViewController {
     }
     
     @objc func pushCrossingController(){
-        let crossing = ModalViewController(houseHolder: house1)
+        let crossing = ModalViewController(houseHolder: housingArray[0])
         crossing.delegate = self
-         navigationController?.pushViewController(crossing, animated: true)
+        navigationController?.pushViewController(crossing, animated: true)
         
     }
     
