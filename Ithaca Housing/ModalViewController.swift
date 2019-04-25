@@ -16,6 +16,7 @@ class ModalViewController: UIViewController {
     var houseType: UITextView!
     var contact: UITextView!
     var postDate: UITextView!
+    weak var delegate: ViewController?
 //    var delegate: ChangeViewControllerLabels!
     
     var houseHolder: Houses!
