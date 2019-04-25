@@ -134,7 +134,7 @@ extension ViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Run some code upon tapping a cell
         if collectionView == housingCollectionView{
-            
+            pushCrossingController()
         }else{
         self.rankingBarCollectionView.allowsMultipleSelection=false
         let cell = collectionView.cellForItem(at: indexPath) as! RankViewCell
