@@ -79,29 +79,16 @@ class ViewController: UIViewController {
             ])
     }
     
-//    @objc func presentModalViewController() {
-//        // Create a view controller with a custom field (such as title).
-//        let modalViewController = ModalViewController(placeholderText: presentModalViewControllerButton.title(for: .normal)!)
-//        // Here, we set the ModalViewController's delegate to our ViewController so it
-//        // can receive information from ModalViewController.
-//        //
-//        // This way, the modalViewController can call the method for when the button title changes
-//        // and the method will be called inside this view controller (self)
+    func presentDetailView(selectedHouse:Houses) {
+        let modalViewController = ModalViewController(houseHolder: selectedHouse)
 //        modalViewController.delegate = self
-//        present(modalViewController, animated: true, completion: nil)
-//    }
-//
-//    @objc func pushNavViewController() {
-//        let navViewController = NavViewController()
-//        // This is how you push the NavViewController onto the navigation stack.
-//        // navigationController is optional because we don't know whether or not this ViewController
-//        // was implemented inside a NavigationController or not. (If it wasn't, nothing would happen)
-//        //
-//        // Now, NavViewController will be at the top of the navigation stack, and ViewController
-//        // will be at the bottom of the stack. The order of a stack is last-in-first-out (LIFO),
-//        // whereas queues are first-in-first-out (FIFO).
-//        navigationController?.pushViewController(navViewController, animated: true)
-//    }
+        present(modalViewController, animated: true, completion: nil)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
 }
 
 extension ViewController: UICollectionViewDataSource{
