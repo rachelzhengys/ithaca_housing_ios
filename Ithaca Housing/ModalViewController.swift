@@ -11,7 +11,7 @@ import UIKit
 
 class ModalViewController: UIViewController {
     var houseImage: UIImageView!
-    var houseLocation: UITextView!
+    var houseLocation: UITextView = UITextView()
     var housePrice: UITextView!
     var houseType: UITextView!
     var contact: UITextView!
@@ -29,12 +29,13 @@ class ModalViewController: UIViewController {
 
     // Creating a custom initializer for a ViewController
     init(houseHolder: Houses) {
-        self.houseImage = UIImageView(image: UIImage(named: houseHolder.image))
-        self.houseLocation.text = houseHolder.location
-        self.housePrice.text = houseHolder.price
-        self.houseType.text = houseHolder.type
-        self.contact.text = houseHolder.contact
-        self.postDate.text = houseHolder.postDate
+//        self.houseImage = UIImageView(image: UIImage(named: houseHolder.image))
+        self.imageHolder = houseHolder.image
+        self.locationHolder = houseHolder.location
+        self.priceHolder = houseHolder.price
+        self.typeHolder = houseHolder.type
+        self.contactHolder = houseHolder.contact
+        self.dateHolder = houseHolder.postDate
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -49,7 +50,6 @@ class ModalViewController: UIViewController {
         
         houseImage = UIImageView()
         houseImage.image = UIImage(named: imageHolder)
-        houseImage.contentMode = .scaleAspectFill
         houseImage.translatesAutoresizingMaskIntoConstraints = false
         houseImage.clipsToBounds = true
         view.addSubview(houseImage)
@@ -57,14 +57,16 @@ class ModalViewController: UIViewController {
         houseLocation = UITextView()
         houseLocation.translatesAutoresizingMaskIntoConstraints = false
         houseLocation.text = locationHolder
-        houseLocation.textColor = .black
+        houseLocation.textColor = UIColor(red: 0.07, green: 0.2, blue: 0.13, alpha: 0.71)
+        houseLocation.font = UIFont(name: "Quicksand-Bold", size: 24)
         houseLocation.textAlignment = .center
         view.addSubview(houseLocation)
         
         housePrice = UITextView()
         housePrice.translatesAutoresizingMaskIntoConstraints = false
         housePrice.text = priceHolder
-        housePrice.textColor = .black
+        housePrice.textColor = UIColor(red: 0.92, green: 0.17, blue: 0.21, alpha: 0.69)
+        housePrice.font = UIFont(name: "OstrichSans-Black", size: 18)
         housePrice.textAlignment = .center
         view.addSubview(housePrice)
         
@@ -72,6 +74,7 @@ class ModalViewController: UIViewController {
         houseType.translatesAutoresizingMaskIntoConstraints = false
         houseType.text = typeHolder
         houseType.textColor = .black
+        houseType.font = UIFont(name: "OstrichSans-Black", size: 18)
         houseType.textAlignment = .center
         view.addSubview(houseType)
         
@@ -79,6 +82,7 @@ class ModalViewController: UIViewController {
         contact.translatesAutoresizingMaskIntoConstraints = false
         contact.text = contactHolder
         contact.textColor = .black
+        contact.font = UIFont(name: "OstrichSans-Black", size: 18)
         contact.textAlignment = .center
         view.addSubview(contact)
         
@@ -86,6 +90,7 @@ class ModalViewController: UIViewController {
         postDate.translatesAutoresizingMaskIntoConstraints = false
         postDate.text = dateHolder
         postDate.textColor = .black
+        postDate.font = UIFont(name: "OstrichSans-Black", size: 18)
         postDate.textAlignment = .center
         view.addSubview(postDate)
         
@@ -96,42 +101,42 @@ class ModalViewController: UIViewController {
         // textField constraints
         NSLayoutConstraint.activate([
             houseImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            houseImage.heightAnchor.constraint(equalToConstant: 300),
+            houseImage.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
             houseImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
-            houseImage.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            houseImage.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -5)
             ])
         
         NSLayoutConstraint.activate([
             houseLocation.topAnchor.constraint(equalTo: houseImage.bottomAnchor),
-            houseLocation.heightAnchor.constraint(equalToConstant: 30),
+            houseLocation.heightAnchor.constraint(equalToConstant: 40),
             houseLocation.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             houseLocation.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             ])
         
         NSLayoutConstraint.activate([
             housePrice.topAnchor.constraint(equalTo: houseLocation.bottomAnchor),
-            housePrice.heightAnchor.constraint(equalToConstant: 30),
+            housePrice.heightAnchor.constraint(equalToConstant: 40),
             housePrice.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             housePrice.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             ])
         
         NSLayoutConstraint.activate([
             houseType.topAnchor.constraint(equalTo: housePrice.bottomAnchor),
-            houseType.heightAnchor.constraint(equalToConstant: 30),
+            houseType.heightAnchor.constraint(equalToConstant: 40),
             houseType.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             houseType.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             ])
         
         NSLayoutConstraint.activate([
             contact.topAnchor.constraint(equalTo: houseType.bottomAnchor),
-            contact.heightAnchor.constraint(equalToConstant: 30),
+            contact.heightAnchor.constraint(equalToConstant: 40),
             contact.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             contact.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             ])
         
         NSLayoutConstraint.activate([
             postDate.topAnchor.constraint(equalTo: contact.bottomAnchor),
-            postDate.heightAnchor.constraint(equalToConstant: 20),
+            postDate.heightAnchor.constraint(equalToConstant: 30),
             postDate.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             postDate.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
             ])
