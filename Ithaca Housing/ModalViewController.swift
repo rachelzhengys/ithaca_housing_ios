@@ -28,13 +28,13 @@ class ModalViewController: UIViewController {
 
     // Creating a custom initializer for a ViewController
     init(houseHolder: Houses) {
+        super.init(nibName: nil, bundle: nil)
         self.houseImage = UIImageView(image: UIImage(named: houseHolder.image))
         self.houseLocation.text = houseHolder.location
         self.housePrice.text = houseHolder.price
         self.houseType.text = houseHolder.type
         self.contact.text = houseHolder.contact
         self.postDate.text = houseHolder.postDate
-        super.init(nibName: nil, bundle: nil)
     }
 
     // This function is required, you can ignore it
