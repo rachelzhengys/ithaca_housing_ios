@@ -11,11 +11,11 @@ import UIKit
 
 class ModalViewController: UIViewController {
     var houseImage: UIImageView!
-    var houseLocation: UITextView = UITextView()
-    var housePrice: UITextView!
-    var houseType: UITextView!
-    var contact: UITextView!
-    var postDate: UITextView!
+    var houseLocation: UILabel = UILabel()
+    var housePrice: UILabel!
+    var houseType: UILabel!
+    var contact: UILabel!
+    var postDate: UILabel!
     weak var delegate: ViewController?
 //    var delegate: ChangeViewControllerLabels!
     
@@ -31,11 +31,11 @@ class ModalViewController: UIViewController {
     init(houseHolder: Houses) {
 //        self.houseImage = UIImageView(image: UIImage(named: houseHolder.image))
         self.imageHolder = houseHolder.image
-        self.locationHolder = houseHolder.location
-        self.priceHolder = houseHolder.price
-        self.typeHolder = houseHolder.type
-        self.contactHolder = houseHolder.contact
-        self.dateHolder = houseHolder.postDate
+        self.locationHolder = "Location: " + houseHolder.location
+        self.priceHolder = "Price(/month): " + houseHolder.price
+        self.typeHolder = "Housing Type: " + houseHolder.type
+        self.contactHolder = "Contact: " + houseHolder.contact
+        self.dateHolder = "Post Date: " + houseHolder.postDate
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -52,25 +52,35 @@ class ModalViewController: UIViewController {
         houseImage.image = UIImage(named: imageHolder)
         houseImage.translatesAutoresizingMaskIntoConstraints = false
         houseImage.clipsToBounds = true
+        houseImage.bounds = view.bounds
         view.addSubview(houseImage)
         
-        houseLocation = UITextView()
+        let layer0 = CALayer()
+        layer0.contents = houseImage
+        layer0.transform = CATransform3DMakeAffineTransform(CGAffineTransform(a: 1, b: 0, c: 0, d: 1.21, tx: 0, ty: -0.1))
+        layer0.bounds = view.bounds
+        layer0.position = view.center
+        view.layer.addSublayer(layer0)
+        view.layer.cornerRadius = 10
+
+        
+        houseLocation = UILabel()
         houseLocation.translatesAutoresizingMaskIntoConstraints = false
         houseLocation.text = locationHolder
         houseLocation.textColor = UIColor(red: 0.07, green: 0.2, blue: 0.13, alpha: 0.71)
-        houseLocation.font = UIFont(name: "Quicksand-Bold", size: 24)
+        houseLocation.font = UIFont(name: "Quicksand-Bold", size: 22)
         houseLocation.textAlignment = .center
         view.addSubview(houseLocation)
         
-        housePrice = UITextView()
+        housePrice = UILabel()
         housePrice.translatesAutoresizingMaskIntoConstraints = false
         housePrice.text = priceHolder
         housePrice.textColor = UIColor(red: 0.92, green: 0.17, blue: 0.21, alpha: 0.69)
-        housePrice.font = UIFont(name: "OstrichSans-Black", size: 18)
+        housePrice.font = UIFont(name: "OstrichSans-Black", size: 22)
         housePrice.textAlignment = .center
         view.addSubview(housePrice)
         
-        houseType = UITextView()
+        houseType = UILabel()
         houseType.translatesAutoresizingMaskIntoConstraints = false
         houseType.text = typeHolder
         houseType.textColor = .black
@@ -78,7 +88,7 @@ class ModalViewController: UIViewController {
         houseType.textAlignment = .center
         view.addSubview(houseType)
         
-        contact = UITextView()
+        contact = UILabel()
         contact.translatesAutoresizingMaskIntoConstraints = false
         contact.text = contactHolder
         contact.textColor = .black
@@ -86,7 +96,7 @@ class ModalViewController: UIViewController {
         contact.textAlignment = .center
         view.addSubview(contact)
         
-        postDate = UITextView()
+        postDate = UILabel()
         postDate.translatesAutoresizingMaskIntoConstraints = false
         postDate.text = dateHolder
         postDate.textColor = .black

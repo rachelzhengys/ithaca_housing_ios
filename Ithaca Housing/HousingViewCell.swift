@@ -25,23 +25,29 @@ class HousingViewCell: UICollectionViewCell{
         houseImage = UIImageView(frame: .zero)
         houseImage.translatesAutoresizingMaskIntoConstraints = false
         houseImage.contentMode = .scaleAspectFit
+        houseImage.layer.cornerRadius = 5
         contentView.addSubview(houseImage)
         
         houseName = UILabel(frame: .zero)
         houseName.translatesAutoresizingMaskIntoConstraints = false
-        houseName.font = UIFont.init(name: "Helvetica", size: 12)
-        houseName.font = UIFont.boldSystemFont(ofSize: 12)
+        houseName.font = UIFont.init(name: "Quicksand-Bold", size: 12.5)
+        houseName.textAlignment = .center
+//        houseName.font = UIFont.boldSystemFont(ofSize: 12)
 //        houseName.highlightedTextColor = .black
         contentView.addSubview(houseName)
         
         money = UILabel(frame: .zero)
         money.translatesAutoresizingMaskIntoConstraints = false
-        money.font = UIFont.systemFont(ofSize: 10)
+        money.font = UIFont.init(name: "OstrichSans-Black", size: 12)
+//        money.textAlignment = .center
+//        money.font = UIFont.systemFont(ofSize: 10)
         contentView.addSubview(money)
         
         houseType = UILabel(frame: .zero)
         houseType.translatesAutoresizingMaskIntoConstraints = false
-        houseType.font = UIFont.systemFont(ofSize: 10)
+        houseType.font = UIFont.init(name: "OstrichSans-Bold", size: 12)
+//        houseType.textAlignment = .center
+//        houseType.font = UIFont.systemFont(ofSize: 10)
         contentView.addSubview(houseType)
         
         updateConstraints()
@@ -57,7 +63,7 @@ class HousingViewCell: UICollectionViewCell{
             houseImage.topAnchor.constraint(equalTo: contentView.topAnchor),
             houseImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             houseImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            houseImage.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: restImageHeight)
+            houseImage.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: restImageHeight),
             ])
         
         NSLayoutConstraint.activate([
@@ -68,14 +74,14 @@ class HousingViewCell: UICollectionViewCell{
             ])
         
         NSLayoutConstraint.activate([
-            money.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 3),
+            money.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             money.trailingAnchor.constraint(equalTo: contentView.centerXAnchor),
             money.topAnchor.constraint(equalTo: houseName.bottomAnchor),
             money.heightAnchor.constraint(equalToConstant: 20)
             ])
         
         NSLayoutConstraint.activate([
-            houseType.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 3),
+            houseType.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             houseType.topAnchor.constraint(equalTo: money.bottomAnchor),
             houseType.heightAnchor.constraint(equalToConstant: 20),
             houseType.trailingAnchor.constraint(equalTo: contentView.centerXAnchor)

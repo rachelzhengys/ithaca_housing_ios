@@ -112,7 +112,8 @@ extension ViewController: UICollectionViewDataSource{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: houseCellReuseIdentifier, for: indexPath) as! HousingViewCell
             let house = housingArray[indexPath.item]
             cell.configure(image: house.image, houseName: house.name, money: house.price, houseType: house.type)
-            cell.layer.borderColor = UIColor.brown.cgColor
+            cell.layer.borderColor = UIColor(red: 0.71, green: 0.76, blue: 0.96, alpha: 1).cgColor
+            cell.layer.cornerRadius = 5
             cell.layer.borderWidth = 1
             return cell
         }
@@ -121,8 +122,8 @@ extension ViewController: UICollectionViewDataSource{
         let ra = rankArray[indexPath.item]
         cell.configure(for: ra)
         //        cell.needsUpdateConstraints()
-        
-        cell.layer.borderColor = UIColor.purple.cgColor
+        cell.layer.borderColor = UIColor(red: 0.96, green: 0.81, blue: 0.71, alpha: 1).cgColor
+        cell.layer.cornerRadius = 5
         cell.layer.borderWidth = 1
         return cell
     }

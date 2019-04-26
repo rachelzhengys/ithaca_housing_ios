@@ -21,7 +21,8 @@ class RankViewCell: UICollectionViewCell {
         
         rankName = UILabel()
         rankName.translatesAutoresizingMaskIntoConstraints = false
-        rankName.font = UIFont.systemFont(ofSize: 16)
+        rankName.font = UIFont.init(name: "Quicksand-Light", size: 15)
+//        rankName.font = UIFont.systemFont(ofSize: 15)
         //        filterName.backgroundColor = .white
         rankName.textColor = .blue
         contentView.addSubview(rankName)
@@ -36,7 +37,7 @@ class RankViewCell: UICollectionViewCell {
     func setupConstraints() {
         NSLayoutConstraint.activate([
             rankName.topAnchor.constraint(equalTo: contentView.topAnchor),
-            rankName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
+            rankName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 3),
             rankName.heightAnchor.constraint(equalToConstant: 20),
             rankName.widthAnchor.constraint(equalToConstant: 150)
             //            filterName.bottomAnchor.constraint(equalTo: contentView.topAnchor),

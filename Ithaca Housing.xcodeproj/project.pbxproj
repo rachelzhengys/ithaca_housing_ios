@@ -11,6 +11,7 @@
 		8A3C05B9227279E700FDC8E4 /* Quicksand-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8A3C05B5227278F600FDC8E4 /* Quicksand-Bold.otf */; };
 		8A3C05BB22727B8D00FDC8E4 /* OstrichSans-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8A3C05BA22727B8D00FDC8E4 /* OstrichSans-Black.otf */; };
 		8A3C05BD22727B9E00FDC8E4 /* OstrichSans-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8A3C05BC22727B9E00FDC8E4 /* OstrichSans-Bold.otf */; };
+		8A3C05BF22728E2E00FDC8E4 /* Quicksand-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8A3C05BE22728E2D00FDC8E4 /* Quicksand-Light.otf */; };
 		8A6BD9E7226F57A400F188F4 /* Houses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6BD9E6226F57A400F188F4 /* Houses.swift */; };
 		8A6BD9E9226F591B00F188F4 /* Ranks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6BD9E8226F591B00F188F4 /* Ranks.swift */; };
 		8A6BD9EB22700C2F00F188F4 /* RankViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6BD9EA22700C2F00F188F4 /* RankViewCell.swift */; };
@@ -25,6 +26,7 @@
 		8A3C05B5227278F600FDC8E4 /* Quicksand-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Bold.otf"; sourceTree = "<group>"; };
 		8A3C05BA22727B8D00FDC8E4 /* OstrichSans-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OstrichSans-Black.otf"; path = "../../../ostrich-sans/OstrichSans-Black.otf"; sourceTree = "<group>"; };
 		8A3C05BC22727B9E00FDC8E4 /* OstrichSans-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OstrichSans-Bold.otf"; path = "../../../ostrich-sans/OstrichSans-Bold.otf"; sourceTree = "<group>"; };
+		8A3C05BE22728E2D00FDC8E4 /* Quicksand-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quicksand-Light.otf"; path = "../../../quicksand/Quicksand-Light.otf"; sourceTree = "<group>"; };
 		8A6BD9E6226F57A400F188F4 /* Houses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Houses.swift; sourceTree = "<group>"; };
 		8A6BD9E8226F591B00F188F4 /* Ranks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ranks.swift; sourceTree = "<group>"; };
 		8A6BD9EA22700C2F00F188F4 /* RankViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankViewCell.swift; sourceTree = "<group>"; };
@@ -52,6 +54,7 @@
 		8A3C05B4227278ED00FDC8E4 /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				8A3C05BE22728E2D00FDC8E4 /* Quicksand-Light.otf */,
 				8A3C05BC22727B9E00FDC8E4 /* OstrichSans-Bold.otf */,
 				8A3C05BA22727B8D00FDC8E4 /* OstrichSans-Black.otf */,
 				8A3C05B5227278F600FDC8E4 /* Quicksand-Bold.otf */,
@@ -151,6 +154,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A3C05BF22728E2E00FDC8E4 /* Quicksand-Light.otf in Resources */,
 				8A3C05B72272796200FDC8E4 /* Assets.xcassets in Resources */,
 				8A3C05B9227279E700FDC8E4 /* Quicksand-Bold.otf in Resources */,
 				8AFAB09A226EBAE10036FC6C /* LaunchScreen.storyboard in Resources */,
