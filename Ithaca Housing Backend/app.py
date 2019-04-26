@@ -1,6 +1,6 @@
 import json
 from flask import Flask, request
-from db import db, House, HousingPicture
+from db import db, House
 
 app = Flask(__name__)
 
@@ -26,7 +26,7 @@ def get_houses():
 def get_house_by_id(house_id):
     house = House.query.filter_by(id=house_id).first()
     if house is None:
-        return json.dumps({'success': False, 'error': 'House not found!'}), 404
+        return json.dumps({"success": False, "error": "House not found!"}), 404
 
     res = {"success": True, "data": house.serialize()}
     return json.dumps(res)
@@ -36,7 +36,7 @@ def get_house_by_id(house_id):
 def post_house():
     post_body = json.loads(request.data)
     house = House(
-        # TODO image
+        image=post_body.get("image"),
         location=post_body.get("location"),
         housing_type=post_body.get("type"),
         contact=post_body.get("contact"),
@@ -54,9 +54,9 @@ def delete_house_by_id(house_id):
     if house is not None:
         db.session.delete(house)
         db.session.commit()
-        return json.dumps({'success': True, 'data': house.serialize()}), 200
+        return json.dumps({"success": True, "data": house.serialize()}), 200
 
-    return json.dumps({'success': False, 'error': 'House not found!'}), 404
+    return json.dumps({"success": False, "error": "House not found!"}), 404
 
 
 if __name__ == "__main__":
