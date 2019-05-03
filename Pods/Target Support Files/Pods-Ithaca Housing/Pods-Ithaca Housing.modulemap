@@ -1,0 +1,6 @@
+framework module Pods_Ithaca_Housing {
+  umbrella header "Pods-Ithaca Housing-umbrella.h"
+
+  export *
+  module * { export * }
+}

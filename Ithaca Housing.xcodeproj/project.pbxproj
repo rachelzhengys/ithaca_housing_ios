@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		843C212C4C4F41B7D9181AE0 /* Pods_Ithaca_Housing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA4723170D454E823E6693F /* Pods_Ithaca_Housing.framework */; };
 		8A3C05B72272796200FDC8E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AFAB096226EBAE10036FC6C /* Assets.xcassets */; };
 		8A3C05B9227279E700FDC8E4 /* Quicksand-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8A3C05B5227278F600FDC8E4 /* Quicksand-Bold.otf */; };
 		8A3C05BB22727B8D00FDC8E4 /* OstrichSans-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8A3C05BA22727B8D00FDC8E4 /* OstrichSans-Black.otf */; };
@@ -23,10 +24,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8A3C05B5227278F600FDC8E4 /* Quicksand-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Bold.otf"; sourceTree = "<group>"; };
-		8A3C05BA22727B8D00FDC8E4 /* OstrichSans-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OstrichSans-Black.otf"; path = "../../../ostrich-sans/OstrichSans-Black.otf"; sourceTree = "<group>"; };
-		8A3C05BC22727B9E00FDC8E4 /* OstrichSans-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OstrichSans-Bold.otf"; path = "../../../ostrich-sans/OstrichSans-Bold.otf"; sourceTree = "<group>"; };
-		8A3C05BE22728E2D00FDC8E4 /* Quicksand-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quicksand-Light.otf"; path = "../../../quicksand/Quicksand-Light.otf"; sourceTree = "<group>"; };
+		8A3C05B5227278F600FDC8E4 /* Quicksand-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quicksand-Bold.otf"; path = "quicksand/Quicksand-Bold.otf"; sourceTree = "<group>"; };
+		8A3C05BA22727B8D00FDC8E4 /* OstrichSans-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OstrichSans-Black.otf"; path = "ostrich-sans/OstrichSans-Black.otf"; sourceTree = "<group>"; };
+		8A3C05BC22727B9E00FDC8E4 /* OstrichSans-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OstrichSans-Bold.otf"; path = "ostrich-sans/OstrichSans-Bold.otf"; sourceTree = "<group>"; };
+		8A3C05BE22728E2D00FDC8E4 /* Quicksand-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quicksand-Light.otf"; path = "quicksand/Quicksand-Light.otf"; sourceTree = "<group>"; };
 		8A6BD9E6226F57A400F188F4 /* Houses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Houses.swift; sourceTree = "<group>"; };
 		8A6BD9E8226F591B00F188F4 /* Ranks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ranks.swift; sourceTree = "<group>"; };
 		8A6BD9EA22700C2F00F188F4 /* RankViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankViewCell.swift; sourceTree = "<group>"; };
@@ -37,7 +38,9 @@
 		8AFAB091226EBADA0036FC6C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8AFAB096226EBAE10036FC6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8AFAB099226EBAE10036FC6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8AFAB09B226EBAE10036FC6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8BA4723170D454E823E6693F /* Pods_Ithaca_Housing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ithaca_Housing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F29AA323B4F4A2EF8812C6B /* Pods-Ithaca Housing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ithaca Housing.debug.xcconfig"; path = "Target Support Files/Pods-Ithaca Housing/Pods-Ithaca Housing.debug.xcconfig"; sourceTree = "<group>"; };
+		C15F92267E00356393558DAF /* Pods-Ithaca Housing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ithaca Housing.release.xcconfig"; path = "Target Support Files/Pods-Ithaca Housing/Pods-Ithaca Housing.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,12 +48,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				843C212C4C4F41B7D9181AE0 /* Pods_Ithaca_Housing.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0233E136F01DD20978663A3A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8BA4723170D454E823E6693F /* Pods_Ithaca_Housing.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8A3C05B4227278ED00FDC8E4 /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -67,6 +79,8 @@
 			children = (
 				8AFAB08E226EBADA0036FC6C /* Ithaca Housing */,
 				8AFAB08D226EBADA0036FC6C /* Products */,
+				B840481C4107E80F5B76234F /* Pods */,
+				0233E136F01DD20978663A3A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,10 +104,18 @@
 				8AFAB096226EBAE10036FC6C /* Assets.xcassets */,
 				8AFAB098226EBAE10036FC6C /* LaunchScreen.storyboard */,
 				8A6BD9E6226F57A400F188F4 /* Houses.swift */,
-				8AFAB09B226EBAE10036FC6C /* Info.plist */,
 				8A3C05B4227278ED00FDC8E4 /* Font */,
 			);
 			path = "Ithaca Housing";
+			sourceTree = "<group>";
+		};
+		B840481C4107E80F5B76234F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8F29AA323B4F4A2EF8812C6B /* Pods-Ithaca Housing.debug.xcconfig */,
+				C15F92267E00356393558DAF /* Pods-Ithaca Housing.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -103,9 +125,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8AFAB09E226EBAE10036FC6C /* Build configuration list for PBXNativeTarget "Ithaca Housing" */;
 			buildPhases = (
+				89CBA60F86426B02148442CC /* [CP] Check Pods Manifest.lock */,
 				8AFAB088226EBADA0036FC6C /* Sources */,
 				8AFAB089226EBADA0036FC6C /* Frameworks */,
 				8AFAB08A226EBADA0036FC6C /* Resources */,
+				904FD6D39E0FFD991E8FA451 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -164,6 +188,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		89CBA60F86426B02148442CC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Ithaca Housing-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		904FD6D39E0FFD991E8FA451 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Ithaca Housing/Pods-Ithaca Housing-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Ithaca Housing/Pods-Ithaca Housing-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8AFAB088226EBADA0036FC6C /* Sources */ = {
@@ -312,6 +383,7 @@
 		};
 		8AFAB09F226EBAE10036FC6C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F29AA323B4F4A2EF8812C6B /* Pods-Ithaca Housing.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -324,13 +396,14 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yisu.Ithaca-Housing";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		8AFAB0A0226EBAE10036FC6C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C15F92267E00356393558DAF /* Pods-Ithaca Housing.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -343,7 +416,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yisu.Ithaca-Housing";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
