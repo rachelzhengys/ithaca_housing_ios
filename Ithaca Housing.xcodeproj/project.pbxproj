@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1067B43B227CD34D001E26C0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1067B43A227CD34D001E26C0 /* NetworkManager.swift */; };
 		843C212C4C4F41B7D9181AE0 /* Pods_Ithaca_Housing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA4723170D454E823E6693F /* Pods_Ithaca_Housing.framework */; };
 		8A3C05B72272796200FDC8E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AFAB096226EBAE10036FC6C /* Assets.xcassets */; };
 		8A3C05B9227279E700FDC8E4 /* Quicksand-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8A3C05B5227278F600FDC8E4 /* Quicksand-Bold.otf */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1067B43A227CD34D001E26C0 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		8A3C05B5227278F600FDC8E4 /* Quicksand-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quicksand-Bold.otf"; path = "quicksand/Quicksand-Bold.otf"; sourceTree = "<group>"; };
 		8A3C05BA22727B8D00FDC8E4 /* OstrichSans-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OstrichSans-Black.otf"; path = "ostrich-sans/OstrichSans-Black.otf"; sourceTree = "<group>"; };
 		8A3C05BC22727B9E00FDC8E4 /* OstrichSans-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OstrichSans-Bold.otf"; path = "ostrich-sans/OstrichSans-Bold.otf"; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				8AFAB096226EBAE10036FC6C /* Assets.xcassets */,
 				8AFAB098226EBAE10036FC6C /* LaunchScreen.storyboard */,
 				8A6BD9E6226F57A400F188F4 /* Houses.swift */,
+				1067B43A227CD34D001E26C0 /* NetworkManager.swift */,
 				8A3C05B4227278ED00FDC8E4 /* Font */,
 			);
 			path = "Ithaca Housing";
@@ -245,6 +248,7 @@
 				8A6BD9EB22700C2F00F188F4 /* RankViewCell.swift in Sources */,
 				8AFAB092226EBADA0036FC6C /* ViewController.swift in Sources */,
 				8A6BD9E9226F591B00F188F4 /* Ranks.swift in Sources */,
+				1067B43B227CD34D001E26C0 /* NetworkManager.swift in Sources */,
 				8A6BD9E7226F57A400F188F4 /* Houses.swift in Sources */,
 				8AFAB090226EBADA0036FC6C /* AppDelegate.swift in Sources */,
 				8A765F2A22714523006AB9CE /* ModalViewController.swift in Sources */,

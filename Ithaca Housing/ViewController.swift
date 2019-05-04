@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     var rankingBarCollectionView: UICollectionView!
     var housingCollectionView: UICollectionView!
     var rankArray: [Ranks]!
-    var housingArray: [Houses]!
+    var housingArray: [Houses] = []
     
     let houseCellReuseIdentifier = "houseCellReuseIdentifier"
     let rankCellReuseIdentifier = "rankCellReuseIdentifier"
@@ -30,9 +30,6 @@ class ViewController: UIViewController {
         let byPostDate = Ranks(rankName: "Rank by Post Date")
         rankArray = [byName, byPrice, byPostDate]
         
-        let house1 = Houses(houseName: "Collegetown Crossing", houseLocation: "307 College Ave", housePrice: "$1350", houseImage: "collegetowncrossing", houseContact: "607-123-4567", houseDescription: "Close to bus stop and grocery store", houseType: "4b2b", postDate: "4.20")
-        
-        housingArray=[house1]
         
         // Setup Collection View
         // UICollectionViewFlowLayout is used to help organize our cells/items into a grid-pattern
@@ -64,6 +61,7 @@ class ViewController: UIViewController {
         view.addSubview(housingCollectionView)
         
         setupConstraints()
+        getHouses()
     }
     func setupConstraints(){
         NSLayoutConstraint.activate([
@@ -77,6 +75,12 @@ class ViewController: UIViewController {
             housingCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
             housingCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
             ])
+    }
+    func getHouses(){
+        NetworkManager.getHouses { houses in
+            self.housingArray = houses
+            
+        }
     }
     
     @objc func pushCrossingController(){

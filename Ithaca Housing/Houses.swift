@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Houses {
+struct Houses: Codable {
     
     var name: String
     var location: String
@@ -18,16 +18,12 @@ class Houses {
     var description: String
     var type: String
     var postDate: String
-    
-    
-    init(houseName: String, houseLocation: String, housePrice: String, houseImage: String, houseContact: String, houseDescription: String, houseType: String, postDate: String) {
-        self.name = houseName
-        self.location = houseLocation
-        self.image = houseImage
-        self.price = housePrice
-        self.contact = houseContact
-        self.description = houseDescription
-        self.type = houseType
-        self.postDate = postDate
 }
+
+struct HouseDataResponse: Codable {
+    var houses: [Houses]
+}
+
+struct HouseResponse: Codable {
+    var data: HouseDataResponse
 }
