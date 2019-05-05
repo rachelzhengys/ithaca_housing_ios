@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
 //    var rankingBarCollectionView: UICollectionView!
-    let rankSegList = ["Rank by Price", "Rank by Post Date"]
+    let rankSegList = ["$ from low to high", "$ from high to low", "Rank by Post Date"]
     
     var rankingSegment: UISegmentedControl!
     var housingCollectionView: UICollectionView!
@@ -40,9 +40,9 @@ class ViewController: UIViewController {
     // Line height: 29 pt
 
         titleView.text = "Ithaca Housing"
-        let byPrice = Ranks(rankName: "Rank by Price")
-        let byPostDate = Ranks(rankName: "Rank by Post Date")
-        rankArray = [byPrice, byPostDate]
+//        let byPrice = Ranks(rankName: "Rank by Price")
+//        let byPostDate = Ranks(rankName: "Rank by Post Date")
+//        rankArray = [byPrice, byPostDate]
         
         
         // Setup Collection View
@@ -102,9 +102,9 @@ class ViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             rankingSegment.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 5),
-            rankingSegment.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant:30),
+            rankingSegment.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant:10),
             rankingSegment.heightAnchor.constraint(equalToConstant: 25),
-            rankingSegment.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30)
+            rankingSegment.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10)
             ])
 
         NSLayoutConstraint.activate([
