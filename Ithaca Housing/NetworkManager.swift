@@ -11,11 +11,59 @@ import Alamofire
 
 class NetworkManager {
     
-    private static let endpoint = "www.baidu.com"
+    private static let normalEndpoint = "http://35.237.181.113/api/houses?sort_options=1"
+    private static let dateEndpoint = "http://35.237.181.113/api/houses?sort_options=0"
+    private static let priceHightoLowEndpoint = "http://35.237.181.113/api/houses?sort_options=3"
+    private static let priceLowtoHighEndpoint = "http://35.237.181.113/api/houses?sort_options=2"
     
     
-    static func getHouses(completion: @escaping ([Houses]) -> Void){
-        Alamofire.request(endpoint, method:.get).validate().responseData { response in
+    static func getHousesNormal(completion: @escaping ([Houses]) -> Void){
+        Alamofire.request(normalEndpoint, method:.get).validate().responseData { response in
+            switch response.result{
+            case .success(let data):
+                let jsonDecoder = JSONDecoder()
+                if let houseResponse = try? jsonDecoder.decode(HouseResponse.self, from: data){
+                    let houses = houseResponse.data.houses
+                    completion(houses)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+            
+        }
+    }
+    static func getHousesDate(completion: @escaping ([Houses]) -> Void){
+        Alamofire.request(dateEndpoint, method:.get).validate().responseData { response in
+            switch response.result{
+            case .success(let data):
+                let jsonDecoder = JSONDecoder()
+                if let houseResponse = try? jsonDecoder.decode(HouseResponse.self, from: data){
+                    let houses = houseResponse.data.houses
+                    completion(houses)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+            
+        }
+    }
+    static func getHousesPriceHightoLow(completion: @escaping ([Houses]) -> Void){
+        Alamofire.request(priceHightoLowEndpoint, method:.get).validate().responseData { response in
+            switch response.result{
+            case .success(let data):
+                let jsonDecoder = JSONDecoder()
+                if let houseResponse = try? jsonDecoder.decode(HouseResponse.self, from: data){
+                    let houses = houseResponse.data.houses
+                    completion(houses)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+            
+        }
+    }
+    static func getHousesPriceLowtoHigh(completion: @escaping ([Houses]) -> Void){
+        Alamofire.request(priceLowtoHighEndpoint, method:.get).validate().responseData { response in
             switch response.result{
             case .success(let data):
                 let jsonDecoder = JSONDecoder()
