@@ -1,4 +1,5 @@
-import json, os
+import json
+import os
 from flask import Flask, request, url_for
 from db import db, House, Housing
 from sqlalchemy import desc
@@ -29,9 +30,10 @@ def get_houses():
     elif sort_options == "3":
         houses = House.query.order_by(desc(House.price)).all()
     else:
-        res = {"success": False, "data": "invalid_sort_options"}
+        res = {""""success": False,""" "data": "invalid_sort_options"}
         return json.dumps(res), 404
-    res = {"success": True, "data": [house.serialize() for house in houses]}
+    res = {""""success": True,""" "data": [
+        house.serialize() for house in houses]}
     return json.dumps(res), 200
 
 
@@ -39,8 +41,8 @@ def get_houses():
 def get_house_by_id(house_id):
     house = House.query.filter_by(id=house_id).first()
     if house is None:
-        return json.dumps({"success": False, "error": "House not found!"}), 404
-    res = {"success": True, "data": house.serialize()}
+        return json.dumps({""""success": False,""" "error": "House not found!"}), 404
+    res = {""""success": True,""" "data": house.serialize()}
     return json.dumps(res)
 
 
@@ -69,7 +71,7 @@ def post_house():
     # TODO delete all previous info
     db.session.bulk_save_objects(house)
     db.session.commit()
-    return json.dumps({"success": True, "data": post_bodies}), 201
+    return json.dumps({""""success": True,""" "data": post_bodies}), 201
 
 
 @app.route("/api/house/<int:house_id>/", methods=["DELETE"])
@@ -79,9 +81,37 @@ def delete_house_by_id(house_id):
     if house is not None:
         db.session.delete(house)
         db.session.commit()
-        return json.dumps({"success": True, "data": house.serialize()}), 200
+        return json.dumps({""""success": True,""" "data": house.serialize()}), 200
 
-    return json.dumps({"success": False, "error": "House not found!"}), 404
+    return json.dumps({""""success": False,""" "error": "House not found!"}), 404
+
+
+# whether the house with specific description already exists in the db
+def exists(descpt):
+    house = House.query.filter_by(description=descpt).first()
+    if house is None:
+        return False
+    else:
+        return True
+
+
+# add all house information in house_dicts to db
+def add_houses(house_dicts):
+    house = [
+        House(
+            imageurl=house_dict["imageUrl"],
+            location=house_dict["location"],
+            housing_type=house_dict["type"],
+            price=house_dict["price"],
+            postdate=house_dict["postdate"],
+            houseurl=house_dict["url"],
+            description=house_dict["description"],
+        )
+        for house_dict in house_dicts
+    ]
+
+    db.session.bulk_save_objects(house)
+    db.session.commit()
 
 
 # def work_refresh():
