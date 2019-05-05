@@ -10,7 +10,10 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var rankingBarCollectionView: UICollectionView!
+//    var rankingBarCollectionView: UICollectionView!
+    let rankSegList = ["Rank by Price", "Rank by Post Date"]
+    
+    var rankingSegment: UISegmentedControl!
     var housingCollectionView: UICollectionView!
     var rankArray: [Ranks]!
     var housingArray: [Houses] = []
@@ -44,25 +47,29 @@ class ViewController: UIViewController {
         
         // Setup Collection View
         // UICollectionViewFlowLayout is used to help organize our cells/items into a grid-pattern
-        let rankLayout = UICollectionViewFlowLayout()
-        rankLayout.scrollDirection = .horizontal
-        rankLayout.minimumInteritemSpacing = padding
-        rankLayout.minimumLineSpacing = padding
+//        let rankLayout = UICollectionViewFlowLayout()
+//        rankLayout.scrollDirection = .horizontal
+//        rankLayout.minimumInteritemSpacing = padding
+//        rankLayout.minimumLineSpacing = padding
         
         let housingLayout = UICollectionViewFlowLayout()
         housingLayout.scrollDirection = .vertical
         housingLayout.minimumLineSpacing = padding
         housingLayout.minimumInteritemSpacing = padding
         
-        rankingBarCollectionView = UICollectionView(frame: .zero, collectionViewLayout: rankLayout)
-        rankingBarCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        rankingBarCollectionView.backgroundColor = .white
-        rankingBarCollectionView.dataSource = self
-        rankingBarCollectionView.delegate = self
-        rankingBarCollectionView.allowsMultipleSelection = true
-        rankingBarCollectionView.register(RankViewCell.self, forCellWithReuseIdentifier: rankCellReuseIdentifier)
-        self.rankingBarCollectionView.allowsMultipleSelection=false
-        view.addSubview(rankingBarCollectionView)
+//        rankingBarCollectionView = UICollectionView(frame: .zero, collectionViewLayout: rankLayout)
+//        rankingBarCollectionView.translatesAutoresizingMaskIntoConstraints = false
+//        rankingBarCollectionView.backgroundColor = .white
+//        rankingBarCollectionView.dataSource = self
+//        rankingBarCollectionView.delegate = self
+//        rankingBarCollectionView.allowsMultipleSelection = true
+//        rankingBarCollectionView.register(RankViewCell.self, forCellWithReuseIdentifier: rankCellReuseIdentifier)
+//        view.addSubview(rankingBarCollectionView)
+        
+        rankingSegment = UISegmentedControl(items: rankSegList)
+        rankingSegment.addTarget(self, action: #selector(updateRank), for: .valueChanged)
+        rankingSegment.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(rankingSegment)
         
         housingCollectionView = UICollectionView(frame: .zero, collectionViewLayout: housingLayout)
         housingCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -74,6 +81,7 @@ class ViewController: UIViewController {
         
         setupConstraints()
         getHouses()
+        updateRank()
     }
     
     func setupConstraints(){
@@ -84,19 +92,32 @@ class ViewController: UIViewController {
             titleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         ])
 
+//        NSLayoutConstraint.activate([
+//            rankingBarCollectionView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 10),
+//            rankingBarCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+////rankingBarCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+//            rankingBarCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+//        ])
+        
         NSLayoutConstraint.activate([
-            rankingBarCollectionView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 10),
-            rankingBarCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-//rankingBarCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            rankingBarCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-        ])
+            rankingSegment.topAnchor.constraint(equalTo: titleView.bottomAnchor),
+            rankingSegment.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant:10),
+            rankingSegment.heightAnchor.constraint(equalToConstant: 40),
+            rankingSegment.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            ])
 
         NSLayoutConstraint.activate([
-            housingCollectionView.topAnchor.constraint(equalTo: rankingBarCollectionView.bottomAnchor, constant: 10),
+            housingCollectionView.topAnchor.constraint(equalTo: rankingSegment.bottomAnchor, constant: 10),
             housingCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             housingCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
             housingCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
             ])
+    }
+    
+    @objc func updateRank(){
+        let idx = rankingSegment.selectedSegmentIndex
+        let current = (idx == UISegmentedControl.noSegment) ? "none" : rankSegList[idx]
+        print(current)
     }
     
     func getHouses(){
@@ -158,12 +179,9 @@ extension ViewController: UICollectionViewDataSource{
 
 extension ViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Run some code upon tapping a cell
         if collectionView == housingCollectionView{
             pushCrossingController()
         }else{
-//        self.rankingBarCollectionView.allowsMultipleSelection=false
-//            UISegmentedControl
         let cell = collectionView.cellForItem(at: indexPath) as! RankViewCell
 //            if cell.rankName == UILabel(rankName:"Rank by Price"){
 //                changeColor(cell:cell, UICollectionView, didSelectItemAt:indexPath)
@@ -172,7 +190,8 @@ extension ViewController: UICollectionViewDelegate{
         let lastCellColor = cell.backgroundColor
         if lastCellColor == .white{
             if cell.isSelected {
-                 cell.backgroundColor = .cyan
+                 cell.backgroundColor = .black
+                cell.tintColor = UIColor.white
              }
          }else{
              if cell.isSelected {
@@ -202,7 +221,6 @@ extension ViewController: UICollectionViewDelegate{
 extension ViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == housingCollectionView{
-            // We want || padding IMAGE padding IMAGE padding ||
             let length = (collectionView.frame.width - padding * 3)/2.0
             return CGSize(width: length, height: length)
         }else{
