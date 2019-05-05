@@ -12,7 +12,7 @@ Response:
   {
     "location": " (Fall Creek)",
     "price": 2400,
-    "imageUrl": "coming soon",
+    "imageurl": "coming soon",
     "description": "Gorgeous Woodwork, Historic, yet Modern & Spacious! Chef's kitchen!",
     "type": "4br 1500ft2 ",
     "postdate": "May  5",
@@ -21,7 +21,7 @@ Response:
   {
     "location": "Please click link for location information",
     "price": 1745,
-    "imageUrl": "coming soon",
+    "imageurl": "coming soon",
     "description": "Sundeck, Gym Included, Rooftop Lounge",
     "type": "1br 606ft2 ",
     "postdate": "May  4",
