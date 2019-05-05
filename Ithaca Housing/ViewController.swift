@@ -25,7 +25,6 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
-
     titleView = UILabel()
     titleView.backgroundColor = .white
     titleView.frame = CGRect(x: 0, y: 0, width: 167, height: 29)
@@ -62,6 +61,7 @@ class ViewController: UIViewController {
         rankingBarCollectionView.delegate = self
         rankingBarCollectionView.allowsMultipleSelection = true
         rankingBarCollectionView.register(RankViewCell.self, forCellWithReuseIdentifier: rankCellReuseIdentifier)
+        self.rankingBarCollectionView.allowsMultipleSelection=false
         view.addSubview(rankingBarCollectionView)
         
         housingCollectionView = UICollectionView(frame: .zero, collectionViewLayout: housingLayout)
@@ -162,11 +162,12 @@ extension ViewController: UICollectionViewDelegate{
         if collectionView == housingCollectionView{
             pushCrossingController()
         }else{
-        self.rankingBarCollectionView.allowsMultipleSelection=false
+//        self.rankingBarCollectionView.allowsMultipleSelection=false
+//            UISegmentedControl
         let cell = collectionView.cellForItem(at: indexPath) as! RankViewCell
-            if cell.rankName == UILabel(rankName:"Rank by Price"){
-                changeColor(cell:cell, UICollectionView, didSelectItemAt:indexPath)
-            }
+//            if cell.rankName == UILabel(rankName:"Rank by Price"){
+//                changeColor(cell:cell, UICollectionView, didSelectItemAt:indexPath)
+//            }
 //        let lastCell = cell
         let lastCellColor = cell.backgroundColor
         if lastCellColor == .white{

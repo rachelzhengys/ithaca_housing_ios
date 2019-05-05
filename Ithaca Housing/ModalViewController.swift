@@ -16,6 +16,7 @@ class ModalViewController: UIViewController {
     var houseType: UILabel!
     var contact: UILabel!
     var postDate: UILabel!
+    var link: UILabel! 
     weak var delegate: ViewController?
 //    var delegate: ChangeViewControllerLabels!
     
