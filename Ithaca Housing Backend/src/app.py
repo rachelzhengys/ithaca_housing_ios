@@ -49,7 +49,7 @@ def post_house():
     post_bodies = json.load(data)
     house = [
         House(
-            imageurl=post_body.get("imageurl"),
+            imageurl=post_body.get("imageUrl"),
             location=post_body.get("location"),
             housing_type=post_body.get("type"),
             # contact=post_body.get("contact"),
@@ -60,7 +60,6 @@ def post_house():
         )
         for post_body in post_bodies
     ]
-    # TODO delete all previous info
     db.session.query(House).delete()
     db.session.bulk_save_objects(house)
     db.session.commit()

@@ -1,0 +1,32 @@
+API:
+GET all houses:
+/api/houses?sort_options=<0-3>
+0代表默认，即按时间从最新到之前
+1为预留代码，别用
+2为按价格从低到高排序
+3为按价格从高到低排序
+Response:
+{
+  "success":true,
+  "data":{[
+  {
+    "location": " (Fall Creek)",
+    "price": 2400,
+    "imageUrl": "coming soon",
+    "description": "Gorgeous Woodwork, Historic, yet Modern & Spacious! Chef's kitchen!",
+    "type": "4br 1500ft2 ",
+    "postdate": "May  5",
+    "url": "https://ithaca.craigslist.org/apa/d/ithaca-gorgeous-woodwork-historic-yet/6864586769.html"
+  },
+  {
+    "location": "Please click link for location information",
+    "price": 1745,
+    "imageUrl": "coming soon",
+    "description": "Sundeck, Gym Included, Rooftop Lounge",
+    "type": "1br 606ft2 ",
+    "postdate": "May  4",
+    "url": "https://ithaca.craigslist.org/apa/d/ithaca-sundeck-gym-included-rooftop/6876808112.html"
+  }]}
+}
+其他API暂时别用，都很危险
+注意每次爬虫需再爬一遍更新时之前的数据会被删除（可以调整）
