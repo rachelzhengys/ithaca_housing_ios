@@ -10,11 +10,9 @@ import Foundation
 
 struct Houses: Codable {
     
-    var name: String
     var location: String
     var price: String
     var image: String
-    var contact: String
     var description: String
     var type: String
     var postDate: String
