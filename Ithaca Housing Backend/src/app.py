@@ -1,7 +1,8 @@
-import json
+import json, os
 from flask import Flask, request, url_for
 from db import db, House, Housing
 from sqlalchemy import desc
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
@@ -43,8 +44,13 @@ def get_house_by_id(house_id):
     return json.dumps(res)
 
 
+def refresh_json():
+    os.system('bash -c "python3 web_scraper.py"')
+
+
 @app.route("/api/house/", methods=["POST"])
 def post_house():
+    refresh_json()
     data = open("house.json")
     post_bodies = json.load(data)
     house = [
@@ -60,7 +66,7 @@ def post_house():
         )
         for post_body in post_bodies
     ]
-    db.session.query(House).delete()
+    # TODO delete all previous info
     db.session.bulk_save_objects(house)
     db.session.commit()
     return json.dumps({"success": True, "data": post_bodies}), 201
@@ -78,5 +84,18 @@ def delete_house_by_id(house_id):
     return json.dumps({"success": False, "error": "House not found!"}), 404
 
 
+# def work_refresh():
+#     with app.app_context():
+#         while 1:
+#             post_house()
+
+#             dt = datetime.now() + timedelta(hours=4)
+#             dt = dt.replace(hour=1)
+
+#             while datetime.now() < dt:
+#                 time.sleep(1)
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
+    # work_refresh()
