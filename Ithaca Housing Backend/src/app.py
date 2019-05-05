@@ -30,10 +30,9 @@ def get_houses():
     elif sort_options == "3":
         houses = House.query.order_by(desc(House.price)).all()
     else:
-        res = {""""success": False,""" "data": "invalid_sort_options"}
+        res = {"data": "invalid_sort_options"}
         return json.dumps(res), 404
-    res = {""""success": True,""" "data": [
-        house.serialize() for house in houses]}
+    res = {"data": [house.serialize() for house in houses]}
     return json.dumps(res), 200
 
 
@@ -41,8 +40,8 @@ def get_houses():
 def get_house_by_id(house_id):
     house = House.query.filter_by(id=house_id).first()
     if house is None:
-        return json.dumps({""""success": False,""" "error": "House not found!"}), 404
-    res = {""""success": True,""" "data": house.serialize()}
+        return json.dumps({"error": "House not found!"}), 404
+    res = {"data": house.serialize()}
     return json.dumps(res)
 
 
@@ -50,13 +49,24 @@ def refresh_json():
     os.system('bash -c "python3 web_scraper.py"')
 
 
+# whether the house with specific description already exists in the db
+def exists(descpt):
+    house = House.query.filter_by(description=descpt).first()
+    if house is None:
+        return False
+    else:
+        return True
+
+
 @app.route("/api/house/", methods=["POST"])
 def post_house():
     refresh_json()
     data = open("house.json")
     post_bodies = json.load(data)
-    house = [
-        House(
+    house = []
+    for post_body in post_bodies:
+        if not exists(post_body.get("description")):
+            house.append(House(
             imageurl=post_body.get("imageUrl"),
             location=post_body.get("location"),
             housing_type=post_body.get("type"),
@@ -65,13 +75,11 @@ def post_house():
             postdate=post_body.get("postdate"),
             houseurl=post_body.get("url"),
             description=post_body.get("description"),
-        )
-        for post_body in post_bodies
-    ]
+        ))
     # TODO delete all previous info
     db.session.bulk_save_objects(house)
     db.session.commit()
-    return json.dumps({""""success": True,""" "data": post_bodies}), 201
+    return json.dumps({"data": post_bodies}), 201
 
 
 @app.route("/api/house/<int:house_id>/", methods=["DELETE"])
@@ -84,15 +92,6 @@ def delete_house_by_id(house_id):
         return json.dumps({""""success": True,""" "data": house.serialize()}), 200
 
     return json.dumps({""""success": False,""" "error": "House not found!"}), 404
-
-
-# whether the house with specific description already exists in the db
-def exists(descpt):
-    house = House.query.filter_by(description=descpt).first()
-    if house is None:
-        return False
-    else:
-        return True
 
 
 # add all house information in house_dicts to db

@@ -4,97 +4,106 @@
 # In[1]:
 
 
-# get_ipython().system(' pip install selenium')
+get_ipython().system(' pip install selenium')
 
 
-# In[2]:
+# In[40]:
 
 
 # import BeautifulSoup4
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-
 # import urllib2
 from bs4 import BeautifulSoup
 import requests
 import urllib
 import json
+import sys
+import app
 
 
-# In[3]:
+# In[35]:
 
 
-base_url = "https://ithaca.craigslist.org/search/apa"
-house_list = []  # list of dicts
+base_url = 'https://ithaca.craigslist.org/search/apa'
+house_list = [] # list of dicts
+new_house_list = [] 
+num_pages = 16
+
+
+# In[37]:
+
+
+# get num_pages
+
+page = urllib.request.urlopen(base_url)
+soup = BeautifulSoup(page, 'html.parser')
+num_tag = soup.find('span', attrs={'class':'totalcount'})
+if num_tag is not None:
+    num_houses = int(num_tag.text)
+    num_pages = num_houses/120
+
+# print(num_pages)
 
 
 # In[30]:
 
 
-def add_house_dicts(info):
+def add_all_houses(info):
     global house_list
     for i in info:
-        description = i.find(
-            "a", attrs={"class": "result-title hdrlnk"}
-        ).text  # description
-        postdate = i.find("time", attrs={"class": "result-date"}).text  # post date
-
+        description = i.find('a', attrs={'class':'result-title hdrlnk'}).text  # description
+        postdate = i.find('time', attrs={'class':'result-date'}).text  # post date
+        
         try:
-            price = i.find("span", attrs={"class": "result-price"}).text  # price
+            price = i.find('span', attrs={'class':'result-price'}).text # price
             price = int(price[1:])
         except:
             price = -1
-
+        
         try:
-            house_type = i.find(
-                "span", attrs={"class": "housing"}
-            ).text  # type and size
-            strs = house_type.split(" ")
-            house_type = ""
+            house_type = i.find('span', attrs={'class':'housing'}).text # type and size
+            strs = house_type.split(' ')
+            house_type = ''
             for s in strs:
-                if len(s) > 0 and s[0].isdigit():
-                    house_type = house_type + s + " "
+                if (len(s)>0 and s[0].isdigit()):
+                    house_type = house_type + s+' '
         except:
-            house_type = "Please click link for type and size information"
+            house_type = 'Please click link for type and size information'
 
         try:
-            location = i.find("span", attrs={"class": "result-hood"}).text  # location
+            location = i.find('span', attrs={'class':'result-hood'}).text # location
             try:
-                location = location.strip(" (").strip(")")
+                location = location.strip(' (').strip(')')
             except:
-                location = location
+                pass
         except:
-            location = "Please click link for location information"
-
+            location = 'Please click link for location information'
+            
         try:
-            url = i.find("a", attrs={"class": "result-image gallery"})[
-                "href"
-            ]  # house info url
+            url = i.find('a', attrs={'class':'result-image gallery'})['href'] # house info url
         except:
-            url = "Sorry, there's no link to the house info"
-
+            url = 'Sorry, there\'s no link to the house info' 
+                      
         try:
             house_page = urllib.request.urlopen(url)
-            soup = BeautifulSoup(house_page, "html.parser")
-            img_url = soup.find("img", attrs={"title": "1", "alt": "1"})[
-                "src"
-            ]  # image url
+            soup = BeautifulSoup(house_page, 'html.parser')
+            img_url = soup.find('img', attrs={'title':'1', 'alt':'1'})['src']  # image url
         except:
             img_url = "Please click link for house images"
-
+        
+        
         # construct house dict
         house = {}
-        house["location"] = location
-        house["price"] = price
-        house["imageUrl"] = img_url
-        house["description"] = description
-        house["type"] = house_type
-        house["postdate"] = postdate
-        house["url"] = url
-
+        house['location'] = location
+        house['price'] = price
+        house['imageUrl'] = img_url
+        house['description'] = description
+        house['type'] = house_type
+        house['postdate'] = postdate
+        house['url'] = url
+        
         house_list.append(house)
-
-
 #         print(house)
 #         print()
 
@@ -104,57 +113,125 @@ def add_house_dicts(info):
 
 def get_from_url(url):
     global house_list
+    global new_house_list
     page = urllib.request.urlopen(url)
-    soup = BeautifulSoup(page, "html.parser")
-    info = soup.find_all("li", attrs={"class": "result-row"})
-    add_house_dicts(info)
+    soup = BeautifulSoup(page, 'html.parser')
+    info = soup.find_all('li', attrs={'class':'result-row'})
+    add_all_houses(info)
 
 
 # In[32]:
 
 
-def get_all_houses():
+def get_all_data():
     global house_list
-
-    for i in range(1):
-        try:
-            get_from_url(base_url + ("" if i == 0 else ("?s=" + str(i * 120))))
-            print("successfully parse page", i)
+    global new_house_list
+    for i in range(int(num_pages)):
+        try:           
+            get_from_url(base_url + ('' if i==0 else ('?s='+str(i*120))) )
+            print('successfully parse page', i)
         except:
             continue
-
-    print(len(house_list))
-
-
-# In[33]:
+    
+    print(len(house_list)) 
 
 
-get_all_houses()
-print("done")
+# In[34]:
 
 
-# In[20]:
+def data_to_json():
+    with open('house.json', 'w') as outfile:
+        json.dump(house_list, outfile)
 
 
-with open("house.json", "w") as outfile:
-    json.dump(house_list, outfile)
+# Methods for refreshing (only collect and add new data to db):
+
+# In[ ]:
+
+
+def add_new_houses():
+    global new_house_list
+    stop = False # stop = True after finding a first existing house in db
+    
+    for i in range(int(num_pages)): 
+        if stop:
+            break
+            
+        url = base_url + ('' if i==0 else ('?s='+str(i*120)))
+        page = urllib.request.urlopen(url)
+        soup = BeautifulSoup(page, 'html.parser')
+        info = soup.find_all('li', attrs={'class':'result-row'})
+        
+        for i in info:
+            description = i.find('a', attrs={'class':'result-title hdrlnk'}).text  # description
+            
+            # check whether the house is already in db
+            if app.exists(description):
+                stop = True
+                break
+            
+            postdate = i.find('time', attrs={'class':'result-date'}).text  # post date
+
+            try:
+                price = i.find('span', attrs={'class':'result-price'}).text # price
+                price = int(price[1:])
+            except:
+                price = -1
+
+            try:
+                house_type = i.find('span', attrs={'class':'housing'}).text # type and size
+                strs = house_type.split(' ')
+                house_type = ''
+                for s in strs:
+                    if (len(s)>0 and s[0].isdigit()):
+                        house_type = house_type + s+' '
+            except:
+                house_type = 'Please click link for type and size information'
+
+            try:
+                location = i.find('span', attrs={'class':'result-hood'}).text # location
+                try:
+                    location = location.strip(' (').strip(')')
+                except:
+                    pass
+            except:
+                location = 'Please click link for location information'
+
+            try:
+                url = i.find('a', attrs={'class':'result-image gallery'})['href'] # house info url
+            except:
+                url = 'Sorry, there\'s no link to the house info' 
+
+            try:
+                house_page = urllib.request.urlopen(url)
+                soup = BeautifulSoup(house_page, 'html.parser')
+                img_url = soup.find('img', attrs={'title':'1', 'alt':'1'})['src']  # image url
+            except:
+                img_url = "Please click link for house images"
+                
+            
+            # construct house dict
+            house = {}
+            house['location'] = location
+            house['price'] = price
+            house['imageUrl'] = img_url
+            house['description'] = description
+            house['type'] = house_type
+            house['postdate'] = postdate
+            house['url'] = url
+
+            new_house_list.append(house)
+
+
+# In[41]:
+
+
+add_new_houses()
+app.add_houses(new_house_list)
 
 
 # In[ ]:
 
 
-# # use selenium to get dynamic html context
-# options = Options()
-# options.add_argument('--headless')
-# options.add_argument('--disable-gpu')
-# # driver = webdriver.Chrome(chrome_options=options)
-# driver = webdriver.Chrome(executable_path='/Users/maoyue/Desktop/ithaca_housing_ios/Ithaca\ Housing\ Backend/src/chromedriver')
-# driver.get(url)
-# time.sleep(3)
-# page = driver.page_source
-# driver.quit()
-# soup = BeautifulSoup(page, 'html.parser')
 
-
-# In[ ]:
 
