@@ -22,8 +22,8 @@ class RankViewCell: UICollectionViewCell {
         rankName = UILabel()
         rankName.translatesAutoresizingMaskIntoConstraints = false
         rankName.font = UIFont.init(name: "Quicksand-Light", size: 15)
-//        rankName.font = UIFont.systemFont(ofSize: 15)
-        //        filterName.backgroundColor = .white
+        //rankName.font = UIFont.systemFont(ofSize: 15)
+        //filterName.backgroundColor = .white
         rankName.textColor = .blue
         contentView.addSubview(rankName)
         

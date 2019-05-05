@@ -87,7 +87,7 @@ class ViewController: UIViewController {
         NSLayoutConstraint.activate([
             rankingBarCollectionView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 10),
             rankingBarCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            rankingBarCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+//rankingBarCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
             rankingBarCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
 
@@ -138,13 +138,13 @@ extension ViewController: UICollectionViewDataSource{
         if collectionView == housingCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: houseCellReuseIdentifier, for: indexPath) as! HousingViewCell
             let house = housingArray[indexPath.item]
-            cell.configure(image: house.image, money: house.price, houseType: house.type)
+            cell.configure(imageUrl: house.imageUrl, money: String(house.price), houseType: house.type)
             cell.layer.borderColor = UIColor(red: 0.71, green: 0.76, blue: 0.96, alpha: 1).cgColor
             cell.layer.cornerRadius = 5
             cell.layer.borderWidth = 1
             return cell
         }
-        //if collectionView is filterCollectionView
+        //if collectionView is rankCollectionView
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier:rankCellReuseIdentifier, for: indexPath) as! RankViewCell
         let ra = rankArray[indexPath.item]
         cell.configure(for: ra)
@@ -154,8 +154,6 @@ extension ViewController: UICollectionViewDataSource{
         cell.layer.borderWidth = 1
         return cell
     }
-    
-
 }
 
 extension ViewController: UICollectionViewDelegate{
@@ -166,9 +164,12 @@ extension ViewController: UICollectionViewDelegate{
         }else{
         self.rankingBarCollectionView.allowsMultipleSelection=false
         let cell = collectionView.cellForItem(at: indexPath) as! RankViewCell
+            if cell.rankName == UILabel(rankName:"Rank by Price"){
+                changeColor(cell:cell, UICollectionView, didSelectItemAt:indexPath)
+            }
+//        let lastCell = cell
         let lastCellColor = cell.backgroundColor
         if lastCellColor == .white{
-             //                print("tap to change color")
             if cell.isSelected {
                  cell.backgroundColor = .cyan
              }
@@ -180,7 +181,7 @@ extension ViewController: UICollectionViewDelegate{
     }
     }
     
-    func changeColor(cell: Ranks, _ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
+    func changeColor(selectedCell: RankViewCell, _ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         let cell = collectionView.cellForItem(at: indexPath) as! RankViewCell
         let lastCellColor = cell.backgroundColor
         if lastCellColor == .white{
