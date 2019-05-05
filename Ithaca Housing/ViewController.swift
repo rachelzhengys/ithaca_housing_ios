@@ -69,6 +69,7 @@ class ViewController: UIViewController {
         rankingSegment = UISegmentedControl(items: rankSegList)
         rankingSegment.addTarget(self, action: #selector(updateRank), for: .valueChanged)
         rankingSegment.translatesAutoresizingMaskIntoConstraints = false
+        rankingSegment.tintColor = UIColor.black
         view.addSubview(rankingSegment)
         
         housingCollectionView = UICollectionView(frame: .zero, collectionViewLayout: housingLayout)
@@ -86,10 +87,10 @@ class ViewController: UIViewController {
     
     func setupConstraints(){
         NSLayoutConstraint.activate([
-            titleView.widthAnchor.constraint(equalToConstant: 167),
+            titleView.widthAnchor.constraint(equalToConstant: 150),
             titleView.heightAnchor.constraint(equalToConstant: 29),
-            titleView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 30),
-            titleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+            titleView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 20),
+            titleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10)
         ])
 
 //        NSLayoutConstraint.activate([
@@ -100,10 +101,10 @@ class ViewController: UIViewController {
 //        ])
         
         NSLayoutConstraint.activate([
-            rankingSegment.topAnchor.constraint(equalTo: titleView.bottomAnchor),
-            rankingSegment.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant:10),
-            rankingSegment.heightAnchor.constraint(equalToConstant: 40),
-            rankingSegment.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            rankingSegment.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 5),
+            rankingSegment.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant:30),
+            rankingSegment.heightAnchor.constraint(equalToConstant: 25),
+            rankingSegment.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30)
             ])
 
         NSLayoutConstraint.activate([
