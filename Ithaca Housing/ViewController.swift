@@ -14,21 +14,33 @@ class ViewController: UIViewController {
     var housingCollectionView: UICollectionView!
     var rankArray: [Ranks]!
     var housingArray: [Houses] = []
+    var titleView: UILabel!
     
     let houseCellReuseIdentifier = "houseCellReuseIdentifier"
     let rankCellReuseIdentifier = "rankCellReuseIdentifier"
     let padding: CGFloat = 8
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        title = "Ithaca Housing"
-        view.backgroundColor = .white
-        
-        let byName = Ranks(rankName: "Rank by Name")
+    view.backgroundColor = .white
+        self.navigationController?.isNavigationBarHidden = true
+
+    titleView = UILabel()
+    titleView.backgroundColor = .white
+    titleView.frame = CGRect(x: 0, y: 0, width: 167, height: 29)
+    titleView.backgroundColor = .white
+    titleView.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+    titleView.text = "Ithaca Housing"
+    titleView.translatesAutoresizingMaskIntoConstraints = false
+    // view.font = UIFont(name: "HelveticaNeue-Medium", size: 24)
+    view.addSubview(titleView)
+    // Line height: 29 pt
+
+        titleView.text = "Ithaca Housing"
         let byPrice = Ranks(rankName: "Rank by Price")
         let byPostDate = Ranks(rankName: "Rank by Post Date")
-        rankArray = [byName, byPrice, byPostDate]
+        rankArray = [byPrice, byPostDate]
         
         
         // Setup Collection View
@@ -63,19 +75,30 @@ class ViewController: UIViewController {
         setupConstraints()
         getHouses()
     }
+    
     func setupConstraints(){
         NSLayoutConstraint.activate([
-            rankingBarCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            titleView.widthAnchor.constraint(equalToConstant: 167),
+            titleView.heightAnchor.constraint(equalToConstant: 29),
+            titleView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 30),
+            titleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        ])
+
+        NSLayoutConstraint.activate([
+            rankingBarCollectionView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 10),
             rankingBarCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             rankingBarCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            rankingBarCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            
-            housingCollectionView.topAnchor.constraint(equalTo: rankingBarCollectionView.bottomAnchor),
+            rankingBarCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
+
+        NSLayoutConstraint.activate([
+            housingCollectionView.topAnchor.constraint(equalTo: rankingBarCollectionView.bottomAnchor, constant: 10),
             housingCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             housingCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
             housingCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
             ])
     }
+    
     func getHouses(){
         NetworkManager.getHouses { houses in
             self.housingArray = houses
@@ -145,7 +168,22 @@ extension ViewController: UICollectionViewDelegate{
         let cell = collectionView.cellForItem(at: indexPath) as! RankViewCell
         let lastCellColor = cell.backgroundColor
         if lastCellColor == .white{
-            //                print("tap to change color")
+             //                print("tap to change color")
+            if cell.isSelected {
+                 cell.backgroundColor = .cyan
+             }
+         }else{
+             if cell.isSelected {
+                 cell.backgroundColor = .white
+             }
+         }
+    }
+    }
+    
+    func changeColor(cell: Ranks, _ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
+        let cell = collectionView.cellForItem(at: indexPath) as! RankViewCell
+        let lastCellColor = cell.backgroundColor
+        if lastCellColor == .white{
             if cell.isSelected {
                 cell.backgroundColor = .cyan
             }
@@ -155,7 +193,9 @@ extension ViewController: UICollectionViewDelegate{
             }
         }
     }
-    }}
+    
+    
+}
 
 extension ViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
