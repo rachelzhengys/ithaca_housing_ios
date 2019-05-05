@@ -88,9 +88,8 @@ class HousingViewCell: UICollectionViewCell{
             ])
     }
     
-    func configure(image: String, houseName: String, money: String, houseType: String){
+    func configure(image: String, money: String, houseType: String){
         self.houseImage.image = UIImage(named: image)
-        self.houseName.text = houseName
         self.money.text = money
         self.houseType.text = houseType
     }

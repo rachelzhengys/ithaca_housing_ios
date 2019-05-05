@@ -115,7 +115,7 @@ extension ViewController: UICollectionViewDataSource{
         if collectionView == housingCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: houseCellReuseIdentifier, for: indexPath) as! HousingViewCell
             let house = housingArray[indexPath.item]
-            cell.configure(image: house.image, houseName: house.name, money: house.price, houseType: house.type)
+            cell.configure(image: house.image, money: house.price, houseType: house.type)
             cell.layer.borderColor = UIColor(red: 0.71, green: 0.76, blue: 0.96, alpha: 1).cgColor
             cell.layer.cornerRadius = 5
             cell.layer.borderWidth = 1
