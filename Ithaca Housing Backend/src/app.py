@@ -61,6 +61,7 @@ def post_house():
         for post_body in post_bodies
     ]
     # TODO delete all previous info
+    db.session.query(House).delete()
     db.session.bulk_save_objects(house)
     db.session.commit()
     return json.dumps({"success": True, "data": post_bodies}), 201
