@@ -29,9 +29,9 @@ def get_houses():
     elif sort_options == "3":
         houses = House.query.order_by(desc(House.price)).all()
     else:
-        res = {"success": False, "data": "invalid_sort_options"}
+        res = {""""success": False,""" "data": "invalid_sort_options"}
         return json.dumps(res), 404
-    res = {"success": True, "data": [house.serialize() for house in houses]}
+    res = {""""success": True,""" "data": [house.serialize() for house in houses]}
     return json.dumps(res), 200
 
 
@@ -39,8 +39,8 @@ def get_houses():
 def get_house_by_id(house_id):
     house = House.query.filter_by(id=house_id).first()
     if house is None:
-        return json.dumps({"success": False, "error": "House not found!"}), 404
-    res = {"success": True, "data": house.serialize()}
+        return json.dumps({""""success": False,""" "error": "House not found!"}), 404
+    res = {""""success": True,""" "data": house.serialize()}
     return json.dumps(res)
 
 
@@ -69,7 +69,7 @@ def post_house():
     # TODO delete all previous info
     db.session.bulk_save_objects(house)
     db.session.commit()
-    return json.dumps({"success": True, "data": post_bodies}), 201
+    return json.dumps({""""success": True,""" "data": post_bodies}), 201
 
 
 @app.route("/api/house/<int:house_id>/", methods=["DELETE"])
@@ -79,9 +79,9 @@ def delete_house_by_id(house_id):
     if house is not None:
         db.session.delete(house)
         db.session.commit()
-        return json.dumps({"success": True, "data": house.serialize()}), 200
+        return json.dumps({""""success": True,""" "data": house.serialize()}), 200
 
-    return json.dumps({"success": False, "error": "House not found!"}), 404
+    return json.dumps({""""success": False,""" "error": "House not found!"}), 404
 
 
 # def work_refresh():

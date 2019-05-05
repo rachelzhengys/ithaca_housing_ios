@@ -7,7 +7,7 @@ GET all houses:
 3为按价格从高到低排序
 Response:
 {
-  "success":true,
+  //"success":true,
   "data":{[
   {
     "location": " (Fall Creek)",
@@ -37,7 +37,7 @@ Body:空的
 }
 Response:
 {
-"success":true,
+//"success":true,
   "data":{[
   {
     "location": " (Fall Creek)",
