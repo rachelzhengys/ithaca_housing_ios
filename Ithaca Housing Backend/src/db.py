@@ -61,6 +61,7 @@ class House(db.Model):
     # contact = db.Column(db.String, nullable=False)
     # this should be changed to user id
     postdate = db.Column(db.String, nullable=False)
+    dt = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     def __init__(self, **kwargs):
         self.imageurl = kwargs.get("imageurl", "")
