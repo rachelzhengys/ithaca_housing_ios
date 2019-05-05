@@ -1,6 +1,6 @@
 import json
 from flask import Flask, request, url_for
-from db import db, House
+from db import db, House, Housing
 from sqlalchemy import desc
 
 app = Flask(__name__)
@@ -45,7 +45,8 @@ def get_house_by_id(house_id):
 
 @app.route("/api/house/", methods=["POST"])
 def post_house():
-    post_bodies = json.loads(request.data)
+    data = open("house.json")
+    post_bodies = json.load(data)
     house = [
         House(
             imageurl=post_body.get("imageurl"),
@@ -59,6 +60,7 @@ def post_house():
         )
         for post_body in post_bodies
     ]
+    # TODO delete all previous info
     db.session.bulk_save_objects(house)
     db.session.commit()
     return json.dumps({"success": True, "data": post_bodies}), 201

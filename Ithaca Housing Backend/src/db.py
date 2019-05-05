@@ -8,44 +8,44 @@ db = SQLAlchemy()
 
 mymetadata = MetaData()
 
-# columns = (
-#     db.Column("houseurl", db.String, primary_key=True),
-#     db.Column("imageurl", db.String, nullable=True),
-#     db.Column("location", db.String, nullable=False),
-#     # subject to change: may be api of google maps
-#     db.Column("type", db.String, nullable=False),  # subject to change
-#     db.Column("price", db.Integer, nullable=False),  # tbd
-#     db.Column("description", db.String, nullable=False),
-#     # contact = db.Column(db.String, nullable=False)
-#     # this should be changed to user id
-#     db.Column("postdate", db.String, nullable=False),
-# )
+columns = (
+    db.Column("houseurl", db.String, primary_key=True),
+    db.Column("imageurl", db.String, nullable=True),
+    db.Column("location", db.String, nullable=False),
+    # subject to change: may be api of google maps
+    db.Column("type", db.String, nullable=False),  # subject to change
+    db.Column("price", db.Integer, nullable=False),  # tbd
+    db.Column("description", db.String, nullable=False),
+    # contact = db.Column(db.String, nullable=False)
+    # this should be changed to user id
+    db.Column("postdate", db.String, nullable=False),
+)
 
-# jsontable = Table("house_in_json", mymetadata, *columns)
-
-
-# class House(object):
-#     def __init__(self, json_data):
-#         json_data = open("house.json")
-#         data = json.load(json_data)
-#         for key, value in data.iteritems():
-#             setattr(self, key, value)
-
-#     def serialize(self):
-#         return {
-#             # "id": self.id,
-#             "location": self.location,
-#             "type": self.housing_type,
-#             "price": self.price,
-#             # "contact": self.contact,
-#             "postdate": self.postdate,
-#             "imageurl": self.imageurl,
-#             "description": self.description,
-#             "houseurl": self.houseurl,
-#         }
+jsontable = Table("house_in_json", mymetadata, *columns)
 
 
-# mapper(House, jsontable)
+class Housing(object):
+    def __init__(self, json_data):
+        json_data = open("house.json")
+        data = json.load(json_data)
+        for key, value in data.iteritems():
+            setattr(self, key, value)
+
+    def serialize(self):
+        return {
+            # "id": self.id,
+            "location": self.location,
+            "type": self.housing_type,
+            "price": self.price,
+            # "contact": self.contact,
+            "postdate": self.postdate,
+            "imageurl": self.imageurl,
+            "description": self.description,
+            "houseurl": self.houseurl,
+        }
+
+
+mapper(Housing, jsontable)
 
 
 class House(db.Model):
