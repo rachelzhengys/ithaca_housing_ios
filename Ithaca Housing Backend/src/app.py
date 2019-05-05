@@ -20,18 +20,19 @@ with app.app_context():
 @app.route("/api/houses")
 def get_houses():
     sort_options = request.args.get("sort_options", default="0")
+    post_date = request.args.get("post_date", default="")
     if sort_options == "0":
-        houses = House.query.all()
-    # elif sort_options == 1:
-    #     houses = House.query.order_by(House.postdate).all()
+        houses = House.query.order_by(House.dt).all()
+    elif sort_options == "1":
+        houses = House.query.order_by(desc(House.dt)).all()
     elif sort_options == "2":
         houses = House.query.order_by(House.price).all()
     elif sort_options == "3":
         houses = House.query.order_by(desc(House.price)).all()
     else:
-        res = {""""success": False,""" "data": "invalid_sort_options"}
+        res = {"data": "invalid_sort_options"}
         return json.dumps(res), 404
-    res = {""""success": True,""" "data": [house.serialize() for house in houses]}
+    res = {"data": [house.serialize() for house in houses]}
     return json.dumps(res), 200
 
 
@@ -39,37 +40,49 @@ def get_houses():
 def get_house_by_id(house_id):
     house = House.query.filter_by(id=house_id).first()
     if house is None:
-        return json.dumps({""""success": False,""" "error": "House not found!"}), 404
-    res = {""""success": True,""" "data": house.serialize()}
+        return json.dumps({"error": "House not found!"}), 404
+    res = {"data": house.serialize()}
     return json.dumps(res)
 
 
-def refresh_json():
+def run_script():
     os.system('bash -c "python3 web_scraper.py"')
+
+
+# whether the house with specific description already exists in the db
+def exists(descpt):
+    with app.app_context():
+        house = House.query.filter_by(description=descpt).first()
+        if house is None:
+            return False
+        else:
+            return True
 
 
 @app.route("/api/house/", methods=["POST"])
 def post_house():
-    refresh_json()
-    data = open("house.json")
-    post_bodies = json.load(data)
-    house = [
-        House(
-            imageurl=post_body.get("imageUrl"),
-            location=post_body.get("location"),
-            housing_type=post_body.get("type"),
-            # contact=post_body.get("contact"),
-            price=post_body.get("price"),
-            postdate=post_body.get("postdate"),
-            houseurl=post_body.get("url"),
-            description=post_body.get("description"),
-        )
-        for post_body in post_bodies
-    ]
-    # TODO delete all previous info
-    db.session.bulk_save_objects(house)
-    db.session.commit()
-    return json.dumps({""""success": True,""" "data": post_bodies}), 201
+    run_script()
+    # data = open("house.json")
+    # post_bodies = json.load(data)
+    # house = []
+    # for post_body in post_bodies:
+    #     if not exists(post_body.get("description")):
+    #         house.append(
+    #             House(
+    #                 imageurl=post_body.get("imageUrl"),
+    #                 location=post_body.get("location"),
+    #                 housing_type=post_body.get("type"),
+    #                 # contact=post_body.get("contact"),
+    #                 price=post_body.get("price"),
+    #                 postdate=post_body.get("postdate"),
+    #                 houseurl=post_body.get("url"),
+    #                 description=post_body.get("description"),
+    #             )
+    #         )
+    # # TODO delete all previous info
+    # db.session.bulk_save_objects(house)
+    # db.session.commit()
+    return json.dumps({"success": True}), 201
 
 
 @app.route("/api/house/<int:house_id>/", methods=["DELETE"])
@@ -79,9 +92,29 @@ def delete_house_by_id(house_id):
     if house is not None:
         db.session.delete(house)
         db.session.commit()
-        return json.dumps({""""success": True,""" "data": house.serialize()}), 200
+        return json.dumps({"data": house.serialize()}), 200
 
-    return json.dumps({""""success": False,""" "error": "House not found!"}), 404
+    return json.dumps({"error": "House not found!"}), 404
+
+
+# add all house information in house_dicts to db
+def add_houses(house_dicts):
+    with app.app_context():
+        house = [
+            House(
+                imageurl=house_dict["imageUrl"],
+                location=house_dict["location"],
+                housing_type=house_dict["type"],
+                price=house_dict["price"],
+                postdate=house_dict["postdate"],
+                houseurl=house_dict["url"],
+                description=house_dict["description"],
+            )
+            for house_dict in house_dicts
+        ]
+
+        db.session.bulk_save_objects(house)
+        db.session.commit()
 
 
 # def work_refresh():
