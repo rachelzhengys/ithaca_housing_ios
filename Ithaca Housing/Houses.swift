@@ -11,11 +11,12 @@ import Foundation
 struct Houses: Codable {
     
     var location: String
-    var price: String
-    var image: String
+    var price: Int
+    var imageUrl: String
     var description: String
     var type: String
     var postDate: String
+    var url: String
 }
 
 struct HouseDataResponse: Codable {
