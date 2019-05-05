@@ -66,16 +66,18 @@ def post_house():
     house = []
     for post_body in post_bodies:
         if not exists(post_body.get("description")):
-            house.append(House(
-            imageurl=post_body.get("imageUrl"),
-            location=post_body.get("location"),
-            housing_type=post_body.get("type"),
-            # contact=post_body.get("contact"),
-            price=post_body.get("price"),
-            postdate=post_body.get("postdate"),
-            houseurl=post_body.get("url"),
-            description=post_body.get("description"),
-        ))
+            house.append(
+                House(
+                    imageurl=post_body.get("imageUrl"),
+                    location=post_body.get("location"),
+                    housing_type=post_body.get("type"),
+                    # contact=post_body.get("contact"),
+                    price=post_body.get("price"),
+                    postdate=post_body.get("postdate"),
+                    houseurl=post_body.get("url"),
+                    description=post_body.get("description"),
+                )
+            )
     # TODO delete all previous info
     db.session.bulk_save_objects(house)
     db.session.commit()
@@ -89,9 +91,9 @@ def delete_house_by_id(house_id):
     if house is not None:
         db.session.delete(house)
         db.session.commit()
-        return json.dumps({""""success": True,""" "data": house.serialize()}), 200
+        return json.dumps({"data": house.serialize()}), 200
 
-    return json.dumps({""""success": False,""" "error": "House not found!"}), 404
+    return json.dumps({"error": "House not found!"}), 404
 
 
 # add all house information in house_dicts to db

@@ -5,3 +5,6 @@ Jinja2==2.10
 MarkupSafe==1.0
 Werkzeug==0.14.1
 flask_sqlalchemy==2.4.0
+selenium==3.141.0
+bs4==0.0.1
+requests==2.21.0
