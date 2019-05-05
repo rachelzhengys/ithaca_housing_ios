@@ -88,8 +88,14 @@ class HousingViewCell: UICollectionViewCell{
             ])
     }
     
-    func configure(image: String, money: String, houseType: String){
-        self.houseImage.image = UIImage(named: image)
+    @objc func getHouseImage(url: String){
+        NetworkManager.fetchHouseImage (imageURL: url){(houseImage) in
+            DispatchQueue.main.async {
+                self.houseImage.image = houseImage
+            }
+        }}
+    func configure(imageUrl: String, money: String, houseType: String){
+        getHouseImage(url: imageUrl)
         self.money.text = money
         self.houseType.text = houseType
     }

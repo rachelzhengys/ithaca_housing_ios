@@ -29,6 +29,20 @@ class NetworkManager {
             
         }
     }
+    static func fetchHouseImage(imageURL: String, completion: @escaping (UIImage) -> Void) {
+        Alamofire.request(imageURL).validate().responseData { (response) in
+            switch response.result {
+            case .success(let data):
+                if let houseImage = UIImage(data: data) {
+                    completion(houseImage)
+                } else {
+                    print("Invalid Response Data")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
     
     
     

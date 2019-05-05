@@ -30,9 +30,9 @@ class ModalViewController: UIViewController {
     // Creating a custom initializer for a ViewController
     init(houseHolder: Houses) {
 //        self.houseImage = UIImageView(image: UIImage(named: houseHolder.image))
-        self.imageHolder = houseHolder.image
+        self.imageHolder = houseHolder.imageUrl
         self.locationHolder = "Location: " + houseHolder.location
-        self.priceHolder = "Price(/month): " + houseHolder.price
+        self.priceHolder = "Price(/month): " + String (houseHolder.price)
         self.typeHolder = "Housing Type: " + houseHolder.type
 //        self.contactHolder = "Contact: " + houseHolder.contact
         self.dateHolder = "Post Date: " + houseHolder.postDate
