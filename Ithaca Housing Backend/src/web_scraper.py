@@ -47,6 +47,7 @@ if num_tag is not None:
 # print(num_pages)
 
 
+################### Methods for collecting all data ##########################
 # In[30]:
 
 
@@ -56,10 +57,12 @@ def add_all_houses(info):
         description = i.find(
             "a", attrs={"class": "result-title hdrlnk"}
         ).text  # description
-        postdate = i.find("time", attrs={"class": "result-date"}).text  # post date
+        postdate = i.find(
+            "time", attrs={"class": "result-date"}).text  # post date
 
         try:
-            price = i.find("span", attrs={"class": "result-price"}).text  # price
+            price = i.find(
+                "span", attrs={"class": "result-price"}).text  # price
             price = int(price[1:])
         except:
             price = -1
@@ -77,7 +80,8 @@ def add_all_houses(info):
             house_type = "Please click link for type and size information"
 
         try:
-            location = i.find("span", attrs={"class": "result-hood"}).text  # location
+            location = i.find(
+                "span", attrs={"class": "result-hood"}).text  # location
             try:
                 location = location.strip(" (").strip(")")
             except:
@@ -152,7 +156,7 @@ def data_to_json():
         json.dump(house_list, outfile)
 
 
-# Methods for refreshing (only collect and add new data to db):
+################### Methods for refreshing (only collect and add new data to db): ##########################
 
 # In[ ]:
 
@@ -180,10 +184,12 @@ def add_new_houses():
                 stop = True
                 break
 
-            postdate = i.find("time", attrs={"class": "result-date"}).text  # post date
+            postdate = i.find(
+                "time", attrs={"class": "result-date"}).text  # post date
 
             try:
-                price = i.find("span", attrs={"class": "result-price"}).text  # price
+                price = i.find(
+                    "span", attrs={"class": "result-price"}).text  # price
                 price = int(price[1:])
             except:
                 price = -1
@@ -213,7 +219,8 @@ def add_new_houses():
 
             try:
                 # house info url
-                url = i.find("a", attrs={"class": "result-image gallery"})["href"]
+                url = i.find(
+                    "a", attrs={"class": "result-image gallery"})["href"]
             except:
                 url = "Sorry, there's no link to the house info"
 
@@ -238,9 +245,11 @@ def add_new_houses():
             new_house_list.append(house)
 
 
+################### main script #########################################################
 # In[41]:
-
-
+# refresh the data only (only the method for refreshing is called, since the local
+# db is prepared by us which contains recently cralwed data, please see README
+# for details)
 add_new_houses()
 app.add_houses(new_house_list)
 
