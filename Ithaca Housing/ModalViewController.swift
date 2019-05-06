@@ -16,7 +16,8 @@ class ModalViewController: UIViewController {
     var houseType: UILabel!
     var contact: UILabel!
     var postDate: UILabel!
-    var link: UILabel! 
+    var link: UILabel!
+    var exitBarButton: UIBarButtonItem!
     weak var delegate: ViewController?
 //    var delegate: ChangeViewControllerLabels!
     
@@ -31,12 +32,11 @@ class ModalViewController: UIViewController {
     // Creating a custom initializer for a ViewController
     init(houseHolder: Houses) {
 //        self.houseImage = UIImageView(image: UIImage(named: houseHolder.image))
-        self.imageHolder = houseHolder.imageUrl
+        self.imageHolder = houseHolder.imageurl
         self.locationHolder = "Location: " + houseHolder.location
         self.priceHolder = "Price(/month): " + String (houseHolder.price)
         self.typeHolder = "Housing Type: " + houseHolder.type
-//        self.contactHolder = "Contact: " + houseHolder.contact
-        self.dateHolder = "Post Date: " + houseHolder.postDate
+        self.dateHolder = "Post Date: " + houseHolder.postdate
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -49,8 +49,12 @@ class ModalViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
+        exitBarButton = UIBarButtonItem(title: "Exit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(dismissToMainPage))
+        self.navigationItem.rightBarButtonItem = exitBarButton
+        
+        
         houseImage = UIImageView()
-        houseImage.image = UIImage(named: imageHolder)
+        getHouseImage(url: imageHolder)
         houseImage.translatesAutoresizingMaskIntoConstraints = false
         houseImage.clipsToBounds = true
         houseImage.bounds = view.bounds
@@ -107,7 +111,9 @@ class ModalViewController: UIViewController {
         
         setupConstraints()
     }
-
+    @objc func dismissToMainPage(){
+        dismiss(animated: true, completion: nil)
+    }
     func setupConstraints() {
         // textField constraints
         NSLayoutConstraint.activate([
@@ -151,6 +157,13 @@ class ModalViewController: UIViewController {
             postDate.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             postDate.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
             ])
+    }
+    @objc func getHouseImage(url: String){
+        NetworkManager.fetchHouseImage (imageURL: url){(houseImage) in
+            DispatchQueue.main.async {
+                self.houseImage.image = houseImage
+            }
+        }
     }
 }
 

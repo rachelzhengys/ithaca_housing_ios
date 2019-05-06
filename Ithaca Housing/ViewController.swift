@@ -10,13 +10,12 @@ import UIKit
 
 class ViewController: UIViewController {
     
-//    var rankingBarCollectionView: UICollectionView!
     let rankSegList = ["$ from low to high", "$ from high to low", "Rank by Post Date"]
     
     var rankingSegment: UISegmentedControl!
     var housingCollectionView: UICollectionView!
     var rankArray: [Ranks]!
-    var housingArray: [Houses] = []
+    var housingArray: [Houses]!
     var titleView: UILabel!
     
     let houseCellReuseIdentifier = "houseCellReuseIdentifier"
@@ -24,47 +23,25 @@ class ViewController: UIViewController {
     let padding: CGFloat = 8
     
     override func viewDidLoad() {
+        housingArray = []
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-    view.backgroundColor = .white
+        view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
-    titleView = UILabel()
-    titleView.backgroundColor = .white
-    titleView.frame = CGRect(x: 0, y: 0, width: 167, height: 29)
-    titleView.backgroundColor = .white
-    titleView.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
-    titleView.text = "Ithaca Housing"
-    titleView.translatesAutoresizingMaskIntoConstraints = false
-    // view.font = UIFont(name: "HelveticaNeue-Medium", size: 24)
-    view.addSubview(titleView)
-    // Line height: 29 pt
-
+        titleView = UILabel()
+        titleView.backgroundColor = .white
+        titleView.frame = CGRect(x: 0, y: 0, width: 167, height: 29)
+        titleView.backgroundColor = .white
+        titleView.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
         titleView.text = "Ithaca Housing"
-//        let byPrice = Ranks(rankName: "Rank by Price")
-//        let byPostDate = Ranks(rankName: "Rank by Post Date")
-//        rankArray = [byPrice, byPostDate]
-        
-        
-        // Setup Collection View
-        // UICollectionViewFlowLayout is used to help organize our cells/items into a grid-pattern
-//        let rankLayout = UICollectionViewFlowLayout()
-//        rankLayout.scrollDirection = .horizontal
-//        rankLayout.minimumInteritemSpacing = padding
-//        rankLayout.minimumLineSpacing = padding
-        
+        titleView.translatesAutoresizingMaskIntoConstraints = false
+    //  view.font = UIFont(name: "HelveticaNeue-Medium", size: 24)
+        view.addSubview(titleView)
+
         let housingLayout = UICollectionViewFlowLayout()
         housingLayout.scrollDirection = .vertical
         housingLayout.minimumLineSpacing = padding
         housingLayout.minimumInteritemSpacing = padding
-        
-//        rankingBarCollectionView = UICollectionView(frame: .zero, collectionViewLayout: rankLayout)
-//        rankingBarCollectionView.translatesAutoresizingMaskIntoConstraints = false
-//        rankingBarCollectionView.backgroundColor = .white
-//        rankingBarCollectionView.dataSource = self
-//        rankingBarCollectionView.delegate = self
-//        rankingBarCollectionView.allowsMultipleSelection = true
-//        rankingBarCollectionView.register(RankViewCell.self, forCellWithReuseIdentifier: rankCellReuseIdentifier)
-//        view.addSubview(rankingBarCollectionView)
         
         rankingSegment = UISegmentedControl(items: rankSegList)
         rankingSegment.addTarget(self, action: #selector(updateRank), for: .valueChanged)
@@ -78,10 +55,11 @@ class ViewController: UIViewController {
         housingCollectionView.dataSource = self
         housingCollectionView.delegate = self
         housingCollectionView.register(HousingViewCell.self, forCellWithReuseIdentifier: houseCellReuseIdentifier)
+        getHousesNormal()
         view.addSubview(housingCollectionView)
         
         setupConstraints()
-        getHouses()
+//        print ("get house info now")
         updateRank()
     }
     
@@ -93,13 +71,6 @@ class ViewController: UIViewController {
             titleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10)
         ])
 
-//        NSLayoutConstraint.activate([
-//            rankingBarCollectionView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 10),
-//            rankingBarCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-////rankingBarCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-//            rankingBarCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-//        ])
-        
         NSLayoutConstraint.activate([
             rankingSegment.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 5),
             rankingSegment.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant:10),
@@ -111,35 +82,61 @@ class ViewController: UIViewController {
             housingCollectionView.topAnchor.constraint(equalTo: rankingSegment.bottomAnchor, constant: 10),
             housingCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             housingCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
-            housingCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            housingCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -5)
             ])
     }
     
     @objc func updateRank(){
         let idx = rankingSegment.selectedSegmentIndex
         let current = (idx == UISegmentedControl.noSegment) ? "none" : rankSegList[idx]
-        print(current)
-    }
-    
-    func getHouses(){
-        NetworkManager.getHouses { houses in
-            self.housingArray = houses
-            
+        if current == "$ from low to high" {
+            getHousePriceLowtoHigh()
         }
-    }
-    
-    @objc func pushCrossingController(){
-        let crossing = ModalViewController(houseHolder: housingArray[0])
-        crossing.delegate = self
-        navigationController?.pushViewController(crossing, animated: true)
+        else if current == "$ from high to low"{
+            getHousePriceHightoLow()
+        }
+        else if current == "Rank by Post Date"{
+            getHouseDate()
+        }
+        else{
+            getHousesNormal()
+        }
         
     }
     
-//    func presentDetailView(selectedHouse:Houses) {
-//        let modalViewController = ModalViewController(houseHolder: selectedHouse)
-////        modalViewController.delegate = self
-//        present(modalViewController, animated: true, completion: nil)
-//    }
+    func getHousesNormal(){
+        NetworkManager.getHousesNormal { houses in
+            self.housingArray = houses
+            self.housingCollectionView.reloadData()
+        }
+    }
+    
+    func getHouseDate(){
+        NetworkManager.getHousesDate { houses in
+            self.housingArray = houses
+            self.housingCollectionView.reloadData()
+        }
+    }
+    
+    func getHousePriceHightoLow(){
+        NetworkManager.getHousesPriceHightoLow{houses in
+            self.housingArray = houses
+            self.housingCollectionView.reloadData()
+        }
+    }
+    
+    func getHousePriceLowtoHigh(){
+        NetworkManager.getHousesPriceLowtoHigh{houses in
+            self.housingArray = houses
+            self.housingCollectionView.reloadData()
+        }
+    }
+    
+    func presentDetailView(selectedHouse: Houses) {
+        let modalViewController = ModalViewController(houseHolder: selectedHouse)
+        modalViewController.delegate = self
+        present(UINavigationController(rootViewController: modalViewController), animated: true, completion: nil)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -149,85 +146,31 @@ class ViewController: UIViewController {
 
 extension ViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == housingCollectionView{
-            return housingArray.count
-        }else{
-            return rankArray.count
-        }
+        return housingArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == housingCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: houseCellReuseIdentifier, for: indexPath) as! HousingViewCell
             let house = housingArray[indexPath.item]
-            cell.configure(imageUrl: house.imageUrl, money: String(house.price), houseType: house.type)
+        cell.configure(imageUrl: house.imageurl, money: "$ "+String(house.price), houseType: "House Type: "+house.type)
             cell.layer.borderColor = UIColor(red: 0.71, green: 0.76, blue: 0.96, alpha: 1).cgColor
             cell.layer.cornerRadius = 5
             cell.layer.borderWidth = 1
             return cell
-        }
-        //if collectionView is rankCollectionView
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier:rankCellReuseIdentifier, for: indexPath) as! RankViewCell
-        let ra = rankArray[indexPath.item]
-        cell.configure(for: ra)
-        //        cell.needsUpdateConstraints()
-        cell.layer.borderColor = UIColor(red: 0.96, green: 0.81, blue: 0.71, alpha: 1).cgColor
-        cell.layer.cornerRadius = 5
-        cell.layer.borderWidth = 1
-        return cell
     }
 }
 
 extension ViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == housingCollectionView{
-            pushCrossingController()
-        }else{
-        let cell = collectionView.cellForItem(at: indexPath) as! RankViewCell
-//            if cell.rankName == UILabel(rankName:"Rank by Price"){
-//                changeColor(cell:cell, UICollectionView, didSelectItemAt:indexPath)
-//            }
-//        let lastCell = cell
-        let lastCellColor = cell.backgroundColor
-        if lastCellColor == .white{
-            if cell.isSelected {
-                 cell.backgroundColor = .black
-                cell.tintColor = UIColor.white
-             }
-         }else{
-             if cell.isSelected {
-                 cell.backgroundColor = .white
-             }
-         }
+        presentDetailView(selectedHouse: (housingArray?[indexPath.item])!)
     }
-    }
-    
-    func changeColor(selectedCell: RankViewCell, _ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
-        let cell = collectionView.cellForItem(at: indexPath) as! RankViewCell
-        let lastCellColor = cell.backgroundColor
-        if lastCellColor == .white{
-            if cell.isSelected {
-                cell.backgroundColor = .cyan
-            }
-        }else{
-            if cell.isSelected {
-                cell.backgroundColor = .white
-            }
-        }
-    }
-    
-    
 }
 
 extension ViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == housingCollectionView{
-            let length = (collectionView.frame.width - padding * 3)/2.0
-            return CGSize(width: length, height: length)
-        }else{
-            let filt_width = (collectionView.frame.width - padding*4)/2
-            return CGSize(width: filt_width, height: 20)
-        }
+            let length = (collectionView.frame.width - 6)
+            let long = collectionView.frame.height/3
+            return CGSize(width: length, height: long)
     }
 }
 
