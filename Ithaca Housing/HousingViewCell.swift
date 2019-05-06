@@ -30,22 +30,22 @@ class HousingViewCell: UICollectionViewCell{
         
         houseName = UILabel(frame: .zero)
         houseName.translatesAutoresizingMaskIntoConstraints = false
-        houseName.font = UIFont.init(name: "Quicksand-Bold", size: 12.5)
+        houseName.font = UIFont.init(name: "Quicksand-Bold", size: 20)
         houseName.textAlignment = .center
 //        houseName.font = UIFont.boldSystemFont(ofSize: 12)
-//        houseName.highlightedTextColor = .black
+        houseName.highlightedTextColor = .black
         contentView.addSubview(houseName)
         
         money = UILabel(frame: .zero)
         money.translatesAutoresizingMaskIntoConstraints = false
-        money.font = UIFont.init(name: "OstrichSans-Black", size: 12)
+        money.font = UIFont.init(name: "OstrichSans-Black", size: 20)
 //        money.textAlignment = .center
 //        money.font = UIFont.systemFont(ofSize: 10)
         contentView.addSubview(money)
         
         houseType = UILabel(frame: .zero)
         houseType.translatesAutoresizingMaskIntoConstraints = false
-        houseType.font = UIFont.init(name: "OstrichSans-Bold", size: 12)
+        houseType.font = UIFont.init(name: "OstrichSans-Bold", size: 25)
 //        houseType.textAlignment = .center
 //        houseType.font = UIFont.systemFont(ofSize: 10)
         contentView.addSubview(houseType)
@@ -84,7 +84,7 @@ class HousingViewCell: UICollectionViewCell{
             houseType.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             houseType.topAnchor.constraint(equalTo: money.bottomAnchor),
             houseType.heightAnchor.constraint(equalToConstant: 20),
-            houseType.trailingAnchor.constraint(equalTo: contentView.centerXAnchor)
+            houseType.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
             ])
     }
     
