@@ -82,14 +82,26 @@ class ViewController: UIViewController {
             housingCollectionView.topAnchor.constraint(equalTo: rankingSegment.bottomAnchor, constant: 10),
             housingCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             housingCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
-            housingCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            housingCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -5)
             ])
     }
     
     @objc func updateRank(){
         let idx = rankingSegment.selectedSegmentIndex
         let current = (idx == UISegmentedControl.noSegment) ? "none" : rankSegList[idx]
-        print(current)
+        if current == "$ from low to high" {
+            getHousePriceLowtoHigh()
+        }
+        else if current == "$ from high to low"{
+            getHousePriceHightoLow()
+        }
+        else if current == "Rank by Post Date"{
+            getHouseDate()
+        }
+        else{
+            getHousesNormal()
+        }
+        
     }
     
     func getHousesNormal(){
@@ -102,18 +114,21 @@ class ViewController: UIViewController {
     func getHouseDate(){
         NetworkManager.getHousesDate { houses in
             self.housingArray = houses
+            self.housingCollectionView.reloadData()
         }
     }
     
     func getHousePriceHightoLow(){
         NetworkManager.getHousesPriceHightoLow{houses in
             self.housingArray = houses
+            self.housingCollectionView.reloadData()
         }
     }
     
     func getHousePriceLowtoHigh(){
         NetworkManager.getHousesPriceLowtoHigh{houses in
             self.housingArray = houses
+            self.housingCollectionView.reloadData()
         }
     }
     
@@ -137,7 +152,7 @@ extension ViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: houseCellReuseIdentifier, for: indexPath) as! HousingViewCell
             let house = housingArray[indexPath.item]
-            cell.configure(imageUrl: house.imageurl, money: String(house.price), houseType: house.type)
+        cell.configure(imageUrl: house.imageurl, money: "$ "+String(house.price), houseType: "House Type: "+house.type)
             cell.layer.borderColor = UIColor(red: 0.71, green: 0.76, blue: 0.96, alpha: 1).cgColor
             cell.layer.cornerRadius = 5
             cell.layer.borderWidth = 1
@@ -153,8 +168,9 @@ extension ViewController: UICollectionViewDelegate{
 
 extension ViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            let length = (collectionView.frame.width - 6 * 3)/2.0
-            return CGSize(width: length, height: length)
+            let length = (collectionView.frame.width - 6)
+            let long = collectionView.frame.height/3
+            return CGSize(width: length, height: long)
     }
 }
 
