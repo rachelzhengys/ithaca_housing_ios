@@ -38,14 +38,15 @@ class HousingViewCell: UICollectionViewCell{
         
         money = UILabel(frame: .zero)
         money.translatesAutoresizingMaskIntoConstraints = false
-        money.font = UIFont.init(name: "OstrichSans-Black", size: 20)
+        money.font = UIFont.init(name: "OstrichSans-Black", size: 18)
 //        money.textAlignment = .center
 //        money.font = UIFont.systemFont(ofSize: 10)
+        money.textColor = .gray
         contentView.addSubview(money)
         
         houseType = UILabel(frame: .zero)
         houseType.translatesAutoresizingMaskIntoConstraints = false
-        houseType.font = UIFont.init(name: "OstrichSans-Bold", size: 25)
+        houseType.font = UIFont.init(name: "HelveticaNeue-Medium", size: 25)
 //        houseType.textAlignment = .center
 //        houseType.font = UIFont.systemFont(ofSize: 10)
         contentView.addSubview(houseType)
@@ -63,27 +64,21 @@ class HousingViewCell: UICollectionViewCell{
             houseImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             houseImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             houseImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            houseImage.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: restImageHeight*2),
+            houseImage.bottomAnchor.constraint(equalTo: money.topAnchor),
             ])
         
-//        NSLayoutConstraint.activate([
-//            houseName.topAnchor.constraint(equalTo: houseImage.bottomAnchor),
-//            houseName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 3),
-//            houseName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-//            houseName.heightAnchor.constraint(equalToConstant: 20)
-//            ])
         
         NSLayoutConstraint.activate([
             money.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             money.trailingAnchor.constraint(equalTo: contentView.centerXAnchor),
-            money.topAnchor.constraint(equalTo: houseImage.bottomAnchor),
+            money.topAnchor.constraint(equalTo: houseType.topAnchor, constant: -10),
             money.heightAnchor.constraint(equalToConstant: 20)
             ])
         
         NSLayoutConstraint.activate([
             houseType.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
-            houseType.topAnchor.constraint(equalTo: money.bottomAnchor),
-            houseType.heightAnchor.constraint(equalToConstant: 20),
+            houseType.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 5),
+            houseType.heightAnchor.constraint(equalToConstant: 30),
             houseType.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
             ])
     }
