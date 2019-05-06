@@ -6,7 +6,11 @@ App Tagline: This app is aiming to help students to find local housing options a
 
 Link(s) to any other public GitHub repo(s) of your app: Only one GitHub repo
 
-Some screenshots of your app (highlight important features): ![alt text](homepageithaca_housing_1.jpg)!
+Some screenshots of your app (highlight important features): 
+
+![alt text](homepageithaca_housing_1.jpg)
+
+![alt text](iPhone8detail.jpg)
 
 A short description of your app (its purpose and features)
 A list of how your app addresses each of the requirements (iOS / Backend)
