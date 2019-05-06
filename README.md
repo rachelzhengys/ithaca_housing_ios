@@ -8,29 +8,24 @@
 
 <div>
   <b>Some screenshots of your app (highlight important features):</b>
-
+</br>
 **The following pictures are our designed sketch**
-
+</br>
 <div>
-
-<img src="homepageithaca_housing_1.jpg" align="left">
-<img src="iPhone8detail.jpg" align="left">
-
+<img src="homepageithaca_housing_1.jpg">
+<img src="iPhone8detail.jpg">
+</br>
 </div>
-<div>
-  
-  </div>
 
 **The following pictures are the actual application pages**
+</br>
 
 <div>
-<img src="1.jpg" align="left" height="20%" width="20%" > <img src="2.jpg" align="left" height="20%" width="20%" > <img src="3.jpg" align="left" height="20%" width="20%" > <img src="4.jpg" align="left" height="20%" width="20%" >
+<img src="1.jpg" height="20%" width="20%" > <img src="2.jpg" height="20%" width="20%" > <img src="3.jpg" height="20%" width="20%" > <img src="4.jpg" height="20%" width="20%" >
 </div>
+</br>
 
 </div>
-<div>
-  
-  </div>
 
 <div>
   <b>A short description of your app (its purpose and features):</b> Users can use this app to looking for houses around ithaca - we collect the housing sources from craigslist and other online websites. Users can view the houses in four different rankings - normal (default) ranking, ranking from low price to high price, ranking from high price to low price, and also ranking by the post date. By clicking into the house detail page, they can see more detailed information about the house.
