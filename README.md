@@ -44,7 +44,8 @@
 - Integration with an API - this API must provide some meaningful value to your app. For example, if you’re creating a music app, you could use the Apple Music API. Most of you will integrate with an API written by students in the backend course.: Satisfied, collborated with backend students.
 
 <b>Backend</b>
-
+- Implemented an API that has a GET request and a POST request, with some parameters. Implemented a database that stores huge amounts of data. Implemented a crawler that will crawl over websites to acquire data.
+- Deployed our server onto Google Cloud.
 
 <i>Anything else you want your grader to know:</i> Nothing
 
