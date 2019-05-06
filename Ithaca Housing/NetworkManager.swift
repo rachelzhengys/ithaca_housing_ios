@@ -18,20 +18,15 @@ class NetworkManager {
     
     
     static func getHousesNormal(completion: @escaping ([Houses]) -> Void){
-        print ("getHouse Normal called")
         Alamofire.request(normalEndpoint, method:.get).validate().responseData { response in
-            print ("start case analysis")
             switch response.result{
             case .success(let data):
-                print ("successfully get houses")
                 let jsonDecoder = JSONDecoder()
                 if let houseResponse = try? jsonDecoder.decode(HouseResponse.self, from: data){
                     let houses = houseResponse.data
-                    print ("decode complete")
                     completion(houses)
                 }
             case .failure(let error):
-                print ("failed to get houses")
                 print(error.localizedDescription)
             }
             

@@ -17,6 +17,7 @@ class ModalViewController: UIViewController {
     var postDate: UILabel!
     var link: UILabel!
     var exitBarButton: UIBarButtonItem!
+    var urlLabel: UILabel!
     weak var delegate: ViewController?
 //    var delegate: ChangeViewControllerLabels!
     
@@ -27,6 +28,7 @@ class ModalViewController: UIViewController {
     var typeHolder: String!
     var contactHolder: String!
     var dateHolder: String!
+    var urlHolder: String!
 
     // Creating a custom initializer for a ViewController
     init(houseHolder: Houses) {
@@ -36,6 +38,7 @@ class ModalViewController: UIViewController {
         self.priceHolder = "Price(/month): " + String (houseHolder.price)
         self.typeHolder = "Housing Type: " + houseHolder.type
         self.dateHolder = "Post Date: " + houseHolder.postdate
+        self.urlHolder = "Post URL: " + houseHolder.houseurl
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -89,11 +92,18 @@ class ModalViewController: UIViewController {
         houseType.font = UIFont(name: "Helvetica-Regular", size: 18)
         view.addSubview(houseType)
         
+        urlLabel = UILabel()
+        urlLabel.translatesAutoresizingMaskIntoConstraints = false
+        urlLabel.text = urlHolder
+        urlLabel.textColor = .gray
+        urlLabel.font = UIFont(name: "Helvetica-Regular", size: 18)
+        urlLabel.numberOfLines = 0
+        view.addSubview(urlLabel)
         
         postDate = UILabel()
         postDate.translatesAutoresizingMaskIntoConstraints = false
         postDate.text = dateHolder
-        postDate.textColor = .black
+        postDate.textColor = .gray
         postDate.font = UIFont(name: "Helvetica-Regular", size: 18)
         view.addSubview(postDate)
         
@@ -138,6 +148,12 @@ class ModalViewController: UIViewController {
             postDate.heightAnchor.constraint(equalToConstant: 30),
             postDate.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             postDate.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            ])
+        NSLayoutConstraint.activate([
+            urlLabel.topAnchor.constraint(equalTo: postDate.bottomAnchor),
+            urlLabel.heightAnchor.constraint(equalToConstant: 90),
+            urlLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
+            urlLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
             ])
     }
     @objc func getHouseImage(url: String){
