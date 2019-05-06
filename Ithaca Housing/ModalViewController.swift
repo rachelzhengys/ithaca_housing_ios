@@ -16,7 +16,8 @@ class ModalViewController: UIViewController {
     var houseType: UILabel!
     var contact: UILabel!
     var postDate: UILabel!
-    var link: UILabel! 
+    var link: UILabel!
+    var exitBarButton: UIBarButtonItem!
     weak var delegate: ViewController?
 //    var delegate: ChangeViewControllerLabels!
     
@@ -47,6 +48,10 @@ class ModalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+        exitBarButton = UIBarButtonItem(title: "Exit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(dismissToMainPage))
+        self.navigationItem.rightBarButtonItem = exitBarButton
+        
         
         houseImage = UIImageView()
         houseImage.image = UIImage(named: imageHolder)
@@ -106,7 +111,9 @@ class ModalViewController: UIViewController {
         
         setupConstraints()
     }
-
+    @objc func dismissToMainPage(){
+        navigationController?.popViewController(animated: true)
+    }
     func setupConstraints() {
         // textField constraints
         NSLayoutConstraint.activate([
