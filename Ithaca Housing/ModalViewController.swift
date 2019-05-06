@@ -35,7 +35,6 @@ class ModalViewController: UIViewController {
         self.locationHolder = "Location: " + houseHolder.location
         self.priceHolder = "Price(/month): " + String (houseHolder.price)
         self.typeHolder = "Housing Type: " + houseHolder.type
-//        self.contactHolder = "Contact: " + houseHolder.contact
         self.dateHolder = "Post Date: " + houseHolder.postDate
         super.init(nibName: nil, bundle: nil)
     }
