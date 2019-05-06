@@ -54,7 +54,7 @@ class ModalViewController: UIViewController {
         
         
         houseImage = UIImageView()
-        houseImage.image = UIImage(named: imageHolder)
+        getHouseImage(url: imageHolder)
         houseImage.translatesAutoresizingMaskIntoConstraints = false
         houseImage.clipsToBounds = true
         houseImage.bounds = view.bounds
@@ -157,6 +157,13 @@ class ModalViewController: UIViewController {
             postDate.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             postDate.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
             ])
+    }
+    @objc func getHouseImage(url: String){
+        NetworkManager.fetchHouseImage (imageURL: url){(houseImage) in
+            DispatchQueue.main.async {
+                self.houseImage.image = houseImage
+            }
+        }
     }
 }
 
