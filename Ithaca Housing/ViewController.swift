@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     var rankingSegment: UISegmentedControl!
     var housingCollectionView: UICollectionView!
     var rankArray: [Ranks]!
-    var housingArray: [Houses] = []
+    var housingArray: [Houses]!
     var titleView: UILabel!
     
     let houseCellReuseIdentifier = "houseCellReuseIdentifier"
@@ -24,6 +24,7 @@ class ViewController: UIViewController {
     let padding: CGFloat = 8
     
     override func viewDidLoad() {
+        getHousesNormal()
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     view.backgroundColor = .white
@@ -81,7 +82,8 @@ class ViewController: UIViewController {
         view.addSubview(housingCollectionView)
         
         setupConstraints()
-        getHouses()
+        print ("get house info now")
+        getHousesNormal()
         updateRank()
     }
     
@@ -93,12 +95,6 @@ class ViewController: UIViewController {
             titleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10)
         ])
 
-//        NSLayoutConstraint.activate([
-//            rankingBarCollectionView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 10),
-//            rankingBarCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-////rankingBarCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-//            rankingBarCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-//        ])
         
         NSLayoutConstraint.activate([
             rankingSegment.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 5),
@@ -121,25 +117,35 @@ class ViewController: UIViewController {
         print(current)
     }
     
-    func getHouses(){
-        NetworkManager.getHouses { houses in
+    func getHousesNormal(){
+        NetworkManager.getHousesNormal { houses in
+            self.housingArray = houses
+            
+        }
+    }
+    func getHouseDate(){
+        NetworkManager.getHousesDate { houses in
+            self.housingArray = houses
+        }
+    }
+    func getHousePriceHightoLow(){
+        NetworkManager.getHousesPriceHightoLow{houses in
+            self.housingArray = houses
+        }
+    }
+    func getHousePriceLowtoHigh(){
+        NetworkManager.getHousesPriceLowtoHigh{houses in
             self.housingArray = houses
             
         }
     }
     
-    @objc func pushCrossingController(){
-        let crossing = ModalViewController(houseHolder: housingArray[0])
-        crossing.delegate = self
-        navigationController?.pushViewController(crossing, animated: true)
-        
-    }
     
-//    func presentDetailView(selectedHouse:Houses) {
-//        let modalViewController = ModalViewController(houseHolder: selectedHouse)
-////        modalViewController.delegate = self
-//        present(modalViewController, animated: true, completion: nil)
-//    }
+    func presentDetailView(selectedHouse:Houses) {
+        let modalViewController = ModalViewController(houseHolder: selectedHouse)
+        modalViewController.delegate = self
+        present(modalViewController, animated: true, completion: nil)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -149,11 +155,7 @@ class ViewController: UIViewController {
 
 extension ViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == housingCollectionView{
-            return housingArray.count
-        }else{
-            return rankArray.count
-        }
+        return housingArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -180,54 +182,15 @@ extension ViewController: UICollectionViewDataSource{
 
 extension ViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == housingCollectionView{
-            pushCrossingController()
-        }else{
-        let cell = collectionView.cellForItem(at: indexPath) as! RankViewCell
-//            if cell.rankName == UILabel(rankName:"Rank by Price"){
-//                changeColor(cell:cell, UICollectionView, didSelectItemAt:indexPath)
-//            }
-//        let lastCell = cell
-        let lastCellColor = cell.backgroundColor
-        if lastCellColor == .white{
-            if cell.isSelected {
-                 cell.backgroundColor = .black
-                cell.tintColor = UIColor.white
-             }
-         }else{
-             if cell.isSelected {
-                 cell.backgroundColor = .white
-             }
-         }
-    }
-    }
-    
-    func changeColor(selectedCell: RankViewCell, _ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
-        let cell = collectionView.cellForItem(at: indexPath) as! RankViewCell
-        let lastCellColor = cell.backgroundColor
-        if lastCellColor == .white{
-            if cell.isSelected {
-                cell.backgroundColor = .cyan
-            }
-        }else{
-            if cell.isSelected {
-                cell.backgroundColor = .white
-            }
-        }
-    }
-    
-    
+        presentDetailView(selectedHouse: (housingArray?[indexPath.item])!)
+}
 }
 
 extension ViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == housingCollectionView{
-            let length = (collectionView.frame.width - padding * 3)/2.0
+            let length = (collectionView.frame.width - 8 * 3)/2.0
             return CGSize(width: length, height: length)
-        }else{
-            let filt_width = (collectionView.frame.width - padding*4)/2
-            return CGSize(width: filt_width, height: 20)
-        }
+        
     }
 }
 
