@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     var rankArray: [Ranks]!
     var housingArray: [Houses]!
     var titleView: UILabel!
+    var refreshControl: UIRefreshControl!
     
     let houseCellReuseIdentifier = "houseCellReuseIdentifier"
     let rankCellReuseIdentifier = "rankCellReuseIdentifier"
@@ -30,13 +31,16 @@ class ViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         titleView = UILabel()
         titleView.backgroundColor = .white
-        titleView.frame = CGRect(x: 0, y: 0, width: 167, height: 29)
         titleView.backgroundColor = .white
         titleView.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
         titleView.text = "Ithaca Housing"
         titleView.translatesAutoresizingMaskIntoConstraints = false
-    //  view.font = UIFont(name: "HelveticaNeue-Medium", size: 24)
+        titleView.font = UIFont(name: "Helvetica", size: 28)
+        titleView.textAlignment = .center
         view.addSubview(titleView)
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(pulledToRefresh), for: .valueChanged)
 
         let housingLayout = UICollectionViewFlowLayout()
         housingLayout.scrollDirection = .vertical
@@ -54,6 +58,7 @@ class ViewController: UIViewController {
         housingCollectionView.backgroundColor = .white
         housingCollectionView.dataSource = self
         housingCollectionView.delegate = self
+        housingCollectionView.refreshControl = refreshControl
         housingCollectionView.register(HousingViewCell.self, forCellWithReuseIdentifier: houseCellReuseIdentifier)
         getHousesNormal()
         view.addSubview(housingCollectionView)
@@ -65,9 +70,9 @@ class ViewController: UIViewController {
     
     func setupConstraints(){
         NSLayoutConstraint.activate([
-            titleView.widthAnchor.constraint(equalToConstant: 150),
+            titleView.widthAnchor.constraint(equalToConstant: view.frame.width),
             titleView.heightAnchor.constraint(equalToConstant: 29),
-            titleView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 20),
+            titleView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10)
         ])
 
@@ -142,6 +147,14 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    @objc func pulledToRefresh() {
+        // Place some code here that fetches new data
+        // Then call refreshControl.endRefreshing() once we get that data back
+        getHousesNormal()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.refreshControl.endRefreshing()
+        }
+    }
 }
 
 extension ViewController: UICollectionViewDataSource{
@@ -155,7 +168,7 @@ extension ViewController: UICollectionViewDataSource{
         cell.configure(imageUrl: house.imageurl, money: "$ "+String(house.price), houseType: "House Type: "+house.type)
             cell.layer.borderColor = UIColor(red: 0.71, green: 0.76, blue: 0.96, alpha: 1).cgColor
             cell.layer.cornerRadius = 5
-            cell.layer.borderWidth = 1
+//            cell.layer.borderWidth = 1
             return cell
     }
 }
@@ -168,8 +181,8 @@ extension ViewController: UICollectionViewDelegate{
 
 extension ViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            let length = (collectionView.frame.width - 6)
-            let long = collectionView.frame.height/3
+            let length = (collectionView.frame.width - 48)
+            let long = collectionView.frame.height/2.5
             return CGSize(width: length, height: long)
     }
 }

@@ -14,7 +14,6 @@ class ModalViewController: UIViewController {
     var houseLocation: UILabel = UILabel()
     var housePrice: UILabel!
     var houseType: UILabel!
-    var contact: UILabel!
     var postDate: UILabel!
     var link: UILabel!
     var exitBarButton: UIBarButtonItem!
@@ -72,41 +71,30 @@ class ModalViewController: UIViewController {
         houseLocation = UILabel()
         houseLocation.translatesAutoresizingMaskIntoConstraints = false
         houseLocation.text = locationHolder
-        houseLocation.textColor = UIColor(red: 0.07, green: 0.2, blue: 0.13, alpha: 0.71)
-        houseLocation.font = UIFont(name: "Quicksand-Bold", size: 22)
-        houseLocation.textAlignment = .center
+        houseLocation.textColor = .gray
+        houseLocation.font = UIFont(name: "Quicksand-Bold", size: 24)
         view.addSubview(houseLocation)
         
         housePrice = UILabel()
         housePrice.translatesAutoresizingMaskIntoConstraints = false
         housePrice.text = priceHolder
-        housePrice.textColor = UIColor(red: 0.92, green: 0.17, blue: 0.21, alpha: 0.69)
-        housePrice.font = UIFont(name: "OstrichSans-Black", size: 22)
-        housePrice.textAlignment = .center
+        housePrice.textColor = .gray
+        housePrice.font = UIFont(name: "Helvetica-Regular", size: 22)
         view.addSubview(housePrice)
         
         houseType = UILabel()
         houseType.translatesAutoresizingMaskIntoConstraints = false
         houseType.text = typeHolder
-        houseType.textColor = .black
-        houseType.font = UIFont(name: "OstrichSans-Black", size: 18)
-        houseType.textAlignment = .center
+        houseType.textColor = .gray
+        houseType.font = UIFont(name: "Helvetica-Regular", size: 18)
         view.addSubview(houseType)
         
-        contact = UILabel()
-        contact.translatesAutoresizingMaskIntoConstraints = false
-        contact.text = contactHolder
-        contact.textColor = .black
-        contact.font = UIFont(name: "OstrichSans-Black", size: 18)
-        contact.textAlignment = .center
-        view.addSubview(contact)
         
         postDate = UILabel()
         postDate.translatesAutoresizingMaskIntoConstraints = false
         postDate.text = dateHolder
         postDate.textColor = .black
-        postDate.font = UIFont(name: "OstrichSans-Black", size: 18)
-        postDate.textAlignment = .center
+        postDate.font = UIFont(name: "Helvetica-Regular", size: 18)
         view.addSubview(postDate)
         
         setupConstraints()
@@ -144,15 +132,9 @@ class ModalViewController: UIViewController {
             houseType.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             ])
         
-        NSLayoutConstraint.activate([
-            contact.topAnchor.constraint(equalTo: houseType.bottomAnchor),
-            contact.heightAnchor.constraint(equalToConstant: 40),
-            contact.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
-            contact.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            ])
         
         NSLayoutConstraint.activate([
-            postDate.topAnchor.constraint(equalTo: contact.bottomAnchor),
+            postDate.topAnchor.constraint(equalTo: houseType.bottomAnchor),
             postDate.heightAnchor.constraint(equalToConstant: 30),
             postDate.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             postDate.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
@@ -165,5 +147,6 @@ class ModalViewController: UIViewController {
             }
         }
     }
+    
 }
 
