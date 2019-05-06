@@ -26,7 +26,7 @@ class NetworkManager {
                 print ("successfully get houses")
                 let jsonDecoder = JSONDecoder()
                 if let houseResponse = try? jsonDecoder.decode(HouseResponse.self, from: data){
-                    let houses = houseResponse.data.houses
+                    let houses = houseResponse.data
                     print ("decode complete")
                     completion(houses)
                 }
@@ -43,7 +43,7 @@ class NetworkManager {
             case .success(let data):
                 let jsonDecoder = JSONDecoder()
                 if let houseResponse = try? jsonDecoder.decode(HouseResponse.self, from: data){
-                    let houses = houseResponse.data.houses
+                    let houses = houseResponse.data
                     completion(houses)
                 }
             case .failure(let error):
@@ -58,7 +58,7 @@ class NetworkManager {
             case .success(let data):
                 let jsonDecoder = JSONDecoder()
                 if let houseResponse = try? jsonDecoder.decode(HouseResponse.self, from: data){
-                    let houses = houseResponse.data.houses
+                    let houses = houseResponse.data
                     completion(houses)
                 }
             case .failure(let error):
@@ -73,7 +73,7 @@ class NetworkManager {
             case .success(let data):
                 let jsonDecoder = JSONDecoder()
                 if let houseResponse = try? jsonDecoder.decode(HouseResponse.self, from: data){
-                    let houses = houseResponse.data.houses
+                    let houses = houseResponse.data
                     completion(houses)
                 }
             case .failure(let error):

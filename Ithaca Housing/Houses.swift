@@ -12,17 +12,13 @@ struct Houses: Codable {
     
     var location: String
     var price: Int
-    var imageUrl: String
+    var imageurl: String
     var description: String
     var type: String
-    var postDate: String
-    var url: String
-}
-
-struct HouseDataResponse: Codable {
-    var houses: [Houses]
+    var postdate: String
+    var houseurl: String
 }
 
 struct HouseResponse: Codable {
-    var data: HouseDataResponse
+    var data: [Houses]
 }

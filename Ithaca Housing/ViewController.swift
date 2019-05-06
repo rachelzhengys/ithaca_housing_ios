@@ -23,6 +23,7 @@ class ViewController: UIViewController {
     let padding: CGFloat = 8
     
     override func viewDidLoad() {
+        housingArray = []
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
@@ -94,6 +95,7 @@ class ViewController: UIViewController {
     func getHousesNormal(){
         NetworkManager.getHousesNormal { houses in
             self.housingArray = houses
+            self.housingCollectionView.reloadData()
         }
     }
     
@@ -135,7 +137,7 @@ extension ViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: houseCellReuseIdentifier, for: indexPath) as! HousingViewCell
             let house = housingArray[indexPath.item]
-            cell.configure(imageUrl: house.imageUrl, money: String(house.price), houseType: house.type)
+            cell.configure(imageUrl: house.imageurl, money: String(house.price), houseType: house.type)
             cell.layer.borderColor = UIColor(red: 0.71, green: 0.76, blue: 0.96, alpha: 1).cgColor
             cell.layer.cornerRadius = 5
             cell.layer.borderWidth = 1
