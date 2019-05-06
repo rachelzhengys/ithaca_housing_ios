@@ -27,7 +27,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
-//        self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         titleView = UILabel()
         titleView.backgroundColor = .white
         titleView.frame = CGRect(x: 0, y: 0, width: 167, height: 29)
@@ -120,7 +120,7 @@ class ViewController: UIViewController {
     func presentDetailView(selectedHouse: Houses) {
         let modalViewController = ModalViewController(houseHolder: selectedHouse)
         modalViewController.delegate = self
-        present(modalViewController, animated: true, completion: nil)
+        present(UINavigationController(rootViewController: modalViewController), animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {

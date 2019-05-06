@@ -112,7 +112,7 @@ class ModalViewController: UIViewController {
         setupConstraints()
     }
     @objc func dismissToMainPage(){
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     func setupConstraints() {
         // textField constraints
