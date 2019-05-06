@@ -1,0 +1,63 @@
+API:
+
+1. GET all houses:
+/api/houses?sort_options=<0-3>
+0: default, sorting by post date in descending order
+1: 
+2: sort by price in ascending order
+3: sort by price in descending order
+Response:
+{
+  "data":{[
+  {
+    "location": " (Fall Creek)",
+    "price": 2400,
+    "imageurl": "coming soon",
+    "description": "Gorgeous Woodwork, Historic, yet Modern & Spacious! Chef's kitchen!",
+    "type": "4br 1500ft2 ",
+    "postdate": "May  5",
+    "houseurl": "https://ithaca.craigslist.org/apa/d/ithaca-gorgeous-woodwork-historic-yet/6864586769.html"
+  },
+  {
+    "location": "Please click link for location information",
+    "price": 1745,
+    "imageurl": "coming soon",
+    "description": "Sundeck, Gym Included, Rooftop Lounge",
+    "type": "1br 606ft2 ",
+    "postdate": "May  4",
+    "houseurl": "https://ithaca.craigslist.org/apa/d/ithaca-sundeck-gym-included-rooftop/6876808112.html"
+  }]}
+}
+
+
+2. Refresh - refresh data (add data that was newly posted onto source website)
+POST: 
+/api/house/
+Body: (empty)
+{
+
+}
+
+
+Response:
+{
+  "data":{[
+  {
+    "location": " (Fall Creek)",
+    "price": 2400,
+    "imageurl": "coming soon",
+    "description": "Gorgeous Woodwork, Historic, yet Modern & Spacious! Chef's kitchen!",
+    "type": "4br 1500ft2 ",
+    "postdate": "May  5",
+    "houseurl": "https://ithaca.craigslist.org/apa/d/ithaca-gorgeous-woodwork-historic-yet/6864586769.html"
+  },
+  {
+    "location": "Please click link for location information",
+    "price": 1745,
+    "imageurl": "coming soon",
+    "description": "Sundeck, Gym Included, Rooftop Lounge",
+    "type": "1br 606ft2 ",
+    "postdate": "May  4",
+    "houseurl": "https://ithaca.craigslist.org/apa/d/ithaca-sundeck-gym-included-rooftop/6876808112.html"
+  }]}
+}
